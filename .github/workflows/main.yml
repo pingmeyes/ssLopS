@@ -15,10 +15,10 @@ jobs:
 
     - name: Configure SSH Key
       run: |
-        echo "$YOUR_SSH_PRIVATE_KEY" > ssh_key
-        chmod 600 ssh_key
-        eval "$(ssh-agent -s)"
-        ssh-add ssh_key
+       echo "${{ secrets.YOUR_SSH_PRIVATE_KEY }}" > ssh_key
+       chmod 600 ssh_key
+       eval "$(ssh-agent -s)"
+       ssh-add ssh_key
 
     - name: Copy Code to GCP VM
       run: |

@@ -1,4 +1,4 @@
-name: Deploy to GCP
+name: Deploy to GCP VM
 
 on:
   push:
@@ -10,24 +10,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      - name: Copy files to GCP
-        uses: easingthemes/ssh-deploy@main
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.GCP_SSH_KEY }}
-          SOURCE: "dist/"
-          REMOTE_HOST: ${{ secrets.HOST_DNS }}
-          REMOTE_USER: ${{ secrets.USERNAME }}
-          TARGET: ${{ secrets.TARGET_DIR }}
+    - name: Setup SSH
+      run: |
+        mkdir -p ~/.ssh/
+        echo "${{ secrets.GCP_SSH_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan -t rsa ${{ secrets.HOST_DNS }} >> ~/.ssh/known_hosts
 
-      - name: Restarting nginx and php
-        uses: appleboy/ssh-action@v1.0.2
-        with:
-          host: ${{ secrets.HOST_DNS }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.GCP_SSH_KEY }}
-          script: |
-            service nginx restart
-            service php7.4-fpm restart
+    - name: Deploy to GCP VM
+      run: |
+        scp -r -i ~/.ssh/id_rsa ./var/www/html/sslops/* root@${{ secrets.HOST_DNS }}:${{ secrets.TARGET_DIR }}

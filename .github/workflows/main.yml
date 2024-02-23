@@ -20,6 +20,11 @@ jobs:
        eval "$(ssh-agent -s)"
        ssh-add ssh_key
 
+    - name: Debug Connection
+      run: |
+       echo "Connecting to IP: ${{ secrets.YOUR_GCP_INSTANCE_IP }}"
+       scp -r -i ssh_key * YOUR_GCP_USERNAME@${{ secrets.YOUR_GCP_INSTANCE_IP }}:/var/www/html/sslops
+
     - name: Copy Code to GCP VM
       run: |
         scp -r -i ssh_key * YOUR_GCP_USERNAME@YOUR_GCP_INSTANCE_IP:/var/www/html/sslops

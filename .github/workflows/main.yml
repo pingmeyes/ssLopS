@@ -15,20 +15,28 @@ jobs:
 
     - name: Configure SSH Key
       run: |
-       echo "${{ secrets.YOUR_SSH_PRIVATE_KEY }}" > ssh_key
-       chmod 600 ssh_key
-       eval "$(ssh-agent -s)"
-       ssh-add ssh_key
+        echo "${{ secrets.YOUR_SSH_PRIVATE_KEY }}" > ssh_key
+        chmod 600 ssh_key
+        eval "$(ssh-agent -s)"
+        ssh-add ssh_key
 
     - name: Debug Connection
       run: |
-       echo "Connecting to IP: ${{ secrets.YOUR_GCP_INSTANCE_IP }}"
-       scp -r -i ssh_key * YOUR_GCP_USERNAME@${{ secrets.YOUR_GCP_INSTANCE_IP }}:/var/www/html/sslops
+        GCP_INSTANCE_IP="${{ secrets.YOUR_GCP_INSTANCE_IP }}"
+        if [ -z "$GCP_INSTANCE_IP" ]; then
+          echo "Error: GCP_INSTANCE_IP is not set."
+          exit 1
+        fi
+        echo "Connecting to IP: $GCP_INSTANCE_IP"
+        scp -r -i ssh_key * YOUR_GCP_USERNAME@$GCP_INSTANCE_IP:/var/www/html/sslops
 
-    - name: Copy Code to GCP VM
+    - name: Restart Nginx and PHP-FPM
       run: |
-        scp -r -i ssh_key * YOUR_GCP_USERNAME@YOUR_GCP_INSTANCE_IP:/var/www/html/sslops
-        ssh -i ssh_key YOUR_GCP_USERNAME@YOUR_GCP_INSTANCE_IP 'sudo systemctl restart nginx && sudo systemctl restart php7.4-fpm'
+        GCP_INSTANCE_IP="${{ secrets.YOUR_GCP_INSTANCE_IP }}"
+        if [ -z "$GCP_INSTANCE_IP" ]; then
+          echo "Error: GCP_INSTANCE_IP is not set."
+          exit 1
+        fi
+        ssh -i ssh_key YOUR_GCP_USERNAME@$GCP_INSTANCE_IP 'sudo systemctl restart nginx && sudo systemctl restart php7.4-fpm'
       env:
         YOUR_GCP_USERNAME: ${{ secrets.GCP_USERNAME }}
-        YOUR_GCP_INSTANCE_IP: ${{ secrets.GCP_INSTANCE_IP }}

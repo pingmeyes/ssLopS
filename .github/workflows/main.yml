@@ -22,4 +22,4 @@ jobs:
 
     - name: Deploy to GCP VM
       run: |
-        ls -al
+        scp -r -i ~/.ssh/id_rsa ./ root@${{ secrets.HOST_DNS }}:${{ secrets.TARGET_DIR }}

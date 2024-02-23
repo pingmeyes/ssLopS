@@ -22,21 +22,27 @@ jobs:
 
     - name: Debug Connection
       run: |
-        GCP_INSTANCE_IP="${{ secrets.YOUR_GCP_INSTANCE_IP }}"
-        if [ -z "$GCP_INSTANCE_IP" ]; then
-          echo "Error: GCP_INSTANCE_IP is not set."
-          exit 1
-        fi
+       GCP_INSTANCE_IP="${{ secrets.YOUR_GCP_INSTANCE_IP }}"
+       GCP_USERNAME="${{ secrets.YOUR_GCP_USERNAME }}"
+       if [ -z "$GCP_INSTANCE_IP" ]; then
+        echo "Error: GCP_INSTANCE_IP is not set."
+        exit 1
+       fi
+       if [ -z "$GCP_USERNAME" ]; then
+        echo "Error: GCP_USERNAME is not set."
+        exit 1
+       fi
         echo "Connecting to IP: $GCP_INSTANCE_IP"
-        scp -r -i ssh_key * YOUR_GCP_USERNAME@$GCP_INSTANCE_IP:/var/www/html/sslops
+        scp -r -i ssh_key . $GCP_USERNAME@$GCP_INSTANCE_IP:/var/www/html/sslops
 
     - name: Restart Nginx and PHP-FPM
       run: |
-        GCP_INSTANCE_IP="${{ secrets.YOUR_GCP_INSTANCE_IP }}"
-        if [ -z "$GCP_INSTANCE_IP" ]; then
-          echo "Error: GCP_INSTANCE_IP is not set."
-          exit 1
-        fi
-        ssh -i ssh_key YOUR_GCP_USERNAME@$GCP_INSTANCE_IP 'sudo systemctl restart nginx && sudo systemctl restart php7.4-fpm'
+       GCP_INSTANCE_IP="${{ secrets.YOUR_GCP_INSTANCE_IP }}"
+       if [ -z "$GCP_INSTANCE_IP" ]; then
+        echo "Error: GCP_INSTANCE_IP is not set."
+        exit 1
+       fi
+        ssh -i ssh_key ${{ secrets.GCP_USERNAME }}@$GCP_INSTANCE_IP 'sudo systemctl restart nginx && sudo systemctl restart php7.4-fpm'
       env:
         YOUR_GCP_USERNAME: ${{ secrets.GCP_USERNAME }}
+

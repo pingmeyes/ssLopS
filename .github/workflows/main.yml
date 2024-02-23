@@ -1,4 +1,4 @@
-name: Deploy to GCP VM
+name: Deploy to GCP
 
 on:
   push:
@@ -10,36 +10,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v2
+      - name: Checkout Repository
+        uses: actions/checkout@v3
 
-    - name: Configure SSH Key
-      run: |
-        echo "${{ secrets.YOUR_SSH_PRIVATE_KEY }}" > ssh_key
-        chmod 600 ssh_key
-        eval "$(ssh-agent -s)"
-        ssh-add ssh_key
+      - name: Copy files to GCP
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.GCP_SSH_KEY }}
+          SOURCE: "dist/"
+          REMOTE_HOST: ${{ secrets.HOST_DNS }}
+          REMOTE_USER: ${{ secrets.USERNAME }}
+          TARGET: ${{ secrets.TARGET_DIR }}
 
-    - name: Debug Connection
-      run: |
-        GCP_INSTANCE_IP="${{ secrets.YOUR_GCP_INSTANCE_IP }}"
-        GCP_USERNAME="${{ secrets.GCP_USERNAME }}"
-        if [ -z "$GCP_INSTANCE_IP" ]; then
-          echo "Error: GCP_INSTANCE_IP is not set."
-          exit 1
-        fi
-        if [ -z "$GCP_USERNAME" ]; then
-          echo "Error: GCP_USERNAME is not set."
-          exit 1
-        fi
-        echo "Connecting to IP: $GCP_INSTANCE_IP"
-        scp -r -i ssh_key . $GCP_USERNAME@$GCP_INSTANCE_IP:~/
-
-    - name: Restart Nginx and PHP-FPM
-      run: |
-        GCP_INSTANCE_IP="${{ secrets.YOUR_GCP_INSTANCE_IP }}"
-        if [ -z "$GCP_INSTANCE_IP" ]; then
-          echo "Error: GCP_INSTANCE_IP is not set."
-          exit 1
-        fi
-        ssh -i ssh_key ${{ secrets.GCP_USERNAME }}@$GCP_INSTANCE_IP 'sudo systemctl restart nginx && sudo systemctl restart php7.4-fpm'
+      - name: Restarting nginx and php
+        uses: appleboy/ssh-action@v1.0.2
+        with:
+          host: ${{ secrets.HOST_DNS }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.GCP_SSH_KEY }}
+          script: |
+            service nginx restart
+            service php7.4-fpm restart

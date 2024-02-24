@@ -22,4 +22,4 @@ jobs:
 
     - name: Deploy to GCP VM
       run: |
-        scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa -r ./ root@34.125.144.12:/var/www/html/ssLopS
+        scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa -r * root@34.125.144.12:/var/www/html/ssLopS

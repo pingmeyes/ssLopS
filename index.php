@@ -147,9 +147,9 @@ body {
 
     <label for="projectName">Project name:</label>
     <select id="projectName" name="projectName" required>
-      <option value="Courier NetWork">EVS</option>
-      <option value="EVS"></option>
-      <option value="Realty Ninja">Project 3</option>
+      <option value="project1">EVS</option>
+      <option value="project2">Realty Ninja</option>
+      <option value="project3">Courier NetWork</option>
     </select>
 
     <button type="submit">Submit</button>

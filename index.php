@@ -135,7 +135,7 @@ body {
   <a href="#about">SSL Manager</a>
   <a href="#services">Resource Analyzer</a>
   <a href="#clients">Cost monitor</a>
-  <a href="#contact">Docs</a>
+  <a href="#contact">Documents</a>
 </div>
 
 <div class="main">

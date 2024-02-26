@@ -150,6 +150,7 @@ body {
       <option value="project1">E-VS</option>
       <option value="project2">Realty Ninja</option>
       <option value="project3">Courier NetWork</option>
+      <option value="project3">Quavered</option>
     </select>
 
     <button type="submit">Submit</button>

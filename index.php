@@ -147,13 +147,13 @@ body {
 
     <label for="projectName">Project name:</label>
     <select id="projectName" name="projectName" required>
-      <option value="project1">E-VS</option>
-      <option value="project2">Realty Ninja</option>
-      <option value="project3">Courier NetWork</option>
-      <option value="project3">Quavered</option>
-      <option value="project3">Phobs</option>
-      <option value="project3">PCI</option>
-      <option value="project3">test</option>
+      <option value="E-VS">E-VS</option>
+      <option value="Realty Ninja">Realty Ninja</option>
+      <option value="Courier NetWork">Courier NetWork</option>
+      <option value="Quavered">Quavered</option>
+      <option value="Phobs">Phobs</option>
+      <option value="PCI">PCI</option>
+      <option value="test">test</option>
     </select>
 
     <button type="submit">Submit</button>

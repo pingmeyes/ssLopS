@@ -153,6 +153,7 @@ body {
       <option value="project3">Quavered</option>
       <option value="project3">Phobs</option>
       <option value="project3">PCI</option>
+      <option value="project3">test</option>
     </select>
 
     <button type="submit">Submit</button>

@@ -127,15 +127,15 @@ function simulateDNSManager($domainName) {
     // Simulate fetching the DNS manager based on the domain name
     // Replace this with your actual logic for obtaining the DNS manager
 
-    // Use dig command to get the NS records
-    $digCommand = "dig +short NS $domainName";
-    $result = shell_exec($digCommand);
+    // Use nslookup command to get the NS records
+    $nslookupCommand = "nslookup -type=NS $domainName";
+    $result = shell_exec($nslookupCommand);
 
     // Extract the DNS manager from the result
-    preg_match('/\.([^.]+)\./', $result, $matches);
+    preg_match_all('/nameserver = (.+)/', $result, $matches);
 
-    // Return the DNS manager
-    return isset($matches[1]) ? $matches[1] : "UnknownDNSManager";
+    // Return the first DNS manager found
+    return isset($matches[1][0]) ? $matches[1][0] : "UnknownDNSManager";
 }
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $domainName = $_POST["domainName"];

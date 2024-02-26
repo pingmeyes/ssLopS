@@ -69,6 +69,50 @@ function checkSSLStatus($domainName, $DaysLeftToExpire) {
     // You may need to replace this with your actual SSL check
     return ($DaysLeftToExpire > 0) ? "Valid" : "Expired";
 }
+function simulateARecord($domainName) {
+    // Simulate fetching ARecord based on the domain name
+    // Replace this with your actual logic for obtaining ARecord
+
+    // Use the host command to get the ARecord
+    $hostCommand = "host $domainName";
+    $result = shell_exec($hostCommand);
+
+    // Extract the ARecord from the result
+    preg_match('/has address (.*)/', $result, $matches);
+
+    // Return the ARecord
+    return isset($matches[1]) ? trim($matches[1]) : null;
+}
+function simulateProvider($domainName) {
+    // Simulate fetching the provider based on the domain name
+    // Replace this with your actual logic for obtaining the provider
+
+    // Example: Hardcoded value for demonstration purposes
+    return "ExampleProvider";
+}
+function simulateDomainProvider($domainName) {
+    // Simulate fetching the domain provider based on the domain name
+    // Replace this with your actual logic for obtaining the domain provider
+
+    // Example: Hardcoded value for demonstration purposes
+    return "ExampleDomainProvider";
+}
+
+function simulateFreePaidStatus($domainName) {
+    // Simulate fetching the free/paid status based on the domain name
+    // Replace this with your actual logic for obtaining the free/paid status
+
+    // Example: Hardcoded value for demonstration purposes
+    return "Paid";
+}
+
+function simulateDNSManager($domainName) {
+    // Simulate fetching the DNS manager based on the domain name
+    // Replace this with your actual logic for obtaining the DNS manager
+
+    // Example: Hardcoded value for demonstration purposes
+    return "ExampleDNSManager";
+}
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $domainName = $_POST["domainName"];
     $projectName = $_POST["projectName"];
@@ -93,10 +137,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $ARecord = simulateARecord($domainName);
 
 
-        updateProvider($conn, $domainName);
-        updateDomainProvider($conn, $domainName);
-        updateFreePaidStatus($conn, $domainName);
-        updateDNSManager($conn, $domainName);
+        $provider = simulateProvider($domainName);
+        $domainProvider = simulateDomainProvider($domainName);
+        $freePaidStatus = simulateFreePaidStatus($domainName);
+        $dnsManager = simulateDNSManager($domainName);
 
 
         // Insert data into the database

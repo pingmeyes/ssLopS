@@ -100,15 +100,29 @@ function simulateDomainProvider($domainName) {
     // Example: Hardcoded value for demonstration purposes
     return "ExampleDomainProvider";
 }
-
 function simulateFreePaidStatus($domainName) {
-    // Simulate fetching the free/paid status based on the domain name
-    // Replace this with your actual logic for obtaining the free/paid status
+    // Simulate fetching SSL certificate details based on the domain name
+    $sslDetails = shell_exec("openssl s_client -connect $domainName:443 -showcerts </dev/null 2>/dev/null | openssl x509 -noout -dates");
 
-    // Example: Hardcoded value for demonstration purposes
-    return "Paid";
+    // Extract the notBefore and notAfter dates from the certificate details
+    preg_match('/notBefore=(.*?)\n/', $sslDetails, $notBeforeMatches);
+    preg_match('/notAfter=(.*?)\n/', $sslDetails, $notAfterMatches);
+
+    if (isset($notBeforeMatches[1]) && isset($notAfterMatches[1])) {
+        // Convert dates to timestamps
+        $notBeforeTimestamp = strtotime($notBeforeMatches[1]);
+        $notAfterTimestamp = strtotime($notAfterMatches[1]);
+
+        // Calculate the total number of days the SSL certificate is valid
+        $totalDays = ($notAfterTimestamp - $notBeforeTimestamp) / (60 * 60 * 24);
+
+        // Determine if the SSL is free or paid based on the total number of days
+        return ($totalDays > 100) ? 'Paid' : 'Free';
+    } else {
+        // Return 'Unknown' if unable to extract dates
+        return 'Unknown';
+    }
 }
-
 function simulateDNSManager($domainName) {
     // Simulate fetching the DNS manager based on the domain name
     // Replace this with your actual logic for obtaining the DNS manager

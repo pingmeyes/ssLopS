@@ -124,24 +124,18 @@ function simulateFreePaidStatus($domainName) {
     }
 }
 function simulateDNSManager($domainName) {
-    // Replace this with your actual logic for obtaining the DNS Manager
-    $command = "dig +short NS $domainName";
+    // Simulate fetching the DNS manager based on the domain name
+    // Replace this with your actual logic for obtaining the DNS manager
 
-    // Execute the command and get the output
-    $dnsManager = shell_exec($command);
+    // Use dig command to get the NS records
+    $digCommand = "dig +short NS $domainName";
+    $result = shell_exec($digCommand);
 
-    // Check if DNS Manager is obtained successfully
-    if ($dnsManager !== null) {
-        // Extract the first part of the domain name from the nameserver addresses
-        $matches = [];
-        preg_match('/(?<=\.)[^.]+/', $dnsManager, $matches);
+    // Extract the DNS manager from the result
+    preg_match('/\.([^.]+)\./', $result, $matches);
 
-        // Return the DNS Manager name
-        return !empty($matches) ? $matches[0] : "UnknownDNSManager";
-    } else {
-        // If the command fails or DNS Manager is not found, return a default value or handle accordingly
-        return "UnknownDNSManager";
-    }
+    // Return the DNS manager
+    return isset($matches[1]) ? $matches[1] : "UnknownDNSManager";
 }
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $domainName = $_POST["domainName"];

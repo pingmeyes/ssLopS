@@ -125,7 +125,7 @@ function simulateFreePaidStatus($domainName) {
 }
 function simulateDNSManager($domainName) {
     // Replace this with your actual logic for obtaining the DNS Manager
-    $command = "nslookup -type=ns $domainName";
+    $command = "dig +short NS $domainName";
 
     // Execute the command and get the output
     $dnsManager = shell_exec($command);
@@ -133,10 +133,10 @@ function simulateDNSManager($domainName) {
     // Check if DNS Manager is obtained successfully
     if ($dnsManager !== null) {
         // Extract relevant information from the output (adjust as needed)
-        preg_match('/\nNameserver:\s+(.*)\n/', $dnsManager, $matches);
+        $dnsManager = trim($dnsManager);
 
         // Return the DNS Manager name
-        return isset($matches[1]) ? trim($matches[1]) : "UnknownDNSManager";
+        return !empty($dnsManager) ? $dnsManager : "UnknownDNSManager";
     } else {
         // If the command fails or DNS Manager is not found, return a default value or handle accordingly
         return "UnknownDNSManager";

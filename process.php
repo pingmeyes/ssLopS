@@ -69,20 +69,6 @@ function checkSSLStatus($domainName, $DaysLeftToExpire) {
     // You may need to replace this with your actual SSL check
     return ($DaysLeftToExpire > 0) ? "Valid" : "Expired";
 }
-function simulateARecord($domainName) {
-    // Simulate fetching ARecord based on the domain name
-    // Replace this with your actual logic for obtaining ARecord
-
-    // Use the host command to get the ARecord
-    $hostCommand = "host $domainName";
-    $result = shell_exec($hostCommand);
-
-    // Extract the ARecord from the result
-    preg_match('/has address (.*)/', $result, $matches);
-
-    // Return the ARecord
-    return isset($matches[1]) ? trim($matches[1]) : null;
-}
 function simulateProvider($domainName) {
     // Simulate fetching the provider based on the domain name
     // Replace this with your actual logic for obtaining the provider

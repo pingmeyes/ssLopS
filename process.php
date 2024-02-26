@@ -73,8 +73,19 @@ function simulateProvider($domainName) {
     // Simulate fetching the provider based on the domain name
     // Replace this with your actual logic for obtaining the provider
 
-    // Example: Hardcoded value for demonstration purposes
-    return "ExampleProvider";
+    $command = "echo | openssl s_client -servername $domainName -connect $domainName:443 2>/dev/null | openssl x509 -noout -issuer | grep -oP '(?<=CN = )[^,]+'";
+
+    // Execute the command and get the output
+    $provider = shell_exec($command);
+
+    // Check if the provider is obtained successfully
+    if ($provider !== null) {
+        // Trim any whitespace and return the provider name
+        return trim($provider);
+    } else {
+        // If the command fails or provider is not found, return a default value or handle accordingly
+        return "UnknownProvider";
+    }
 }
 function simulateDomainProvider($domainName) {
     // Simulate fetching the domain provider based on the domain name

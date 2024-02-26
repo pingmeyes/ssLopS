@@ -124,11 +124,23 @@ function simulateFreePaidStatus($domainName) {
     }
 }
 function simulateDNSManager($domainName) {
-    // Simulate fetching the DNS manager based on the domain name
-    // Replace this with your actual logic for obtaining the DNS manager
+    // Replace this with your actual logic for obtaining the DNS Manager
+    $command = "nslookup -type=ns $domainName";
 
-    // Example: Hardcoded value for demonstration purposes
-    return "ExampleDNSManager";
+    // Execute the command and get the output
+    $dnsManager = shell_exec($command);
+
+    // Check if DNS Manager is obtained successfully
+    if ($dnsManager !== null) {
+        // Extract relevant information from the output (adjust as needed)
+        preg_match('/\nNameserver:\s+(.*)\n/', $dnsManager, $matches);
+
+        // Return the DNS Manager name
+        return isset($matches[1]) ? trim($matches[1]) : "UnknownDNSManager";
+    } else {
+        // If the command fails or DNS Manager is not found, return a default value or handle accordingly
+        return "UnknownDNSManager";
+    }
 }
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $domainName = $_POST["domainName"];

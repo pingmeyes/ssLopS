@@ -132,11 +132,12 @@ function simulateDNSManager($domainName) {
 
     // Check if DNS Manager is obtained successfully
     if ($dnsManager !== null) {
-        // Extract relevant information from the output (adjust as needed)
-        $dnsManager = trim($dnsManager);
+        // Extract the first part of the domain name from the nameserver addresses
+        $matches = [];
+        preg_match('/(?<=\.)[^.]+/', $dnsManager, $matches);
 
         // Return the DNS Manager name
-        return !empty($dnsManager) ? $dnsManager : "UnknownDNSManager";
+        return !empty($matches) ? $matches[0] : "UnknownDNSManager";
     } else {
         // If the command fails or DNS Manager is not found, return a default value or handle accordingly
         return "UnknownDNSManager";

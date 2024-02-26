@@ -131,11 +131,13 @@ function simulateDNSManager($domainName) {
     $nslookupCommand = "nslookup -type=NS $domainName";
     $result = shell_exec($nslookupCommand);
 
-    // Extract the DNS manager from the result
+    // Extract the DNS manager from the result using awk
     preg_match_all('/nameserver = (.+)/', $result, $matches);
 
-    // Return the first DNS manager found
-    return isset($matches[1][0]) ? $matches[1][0] : "UnknownDNSManager";
+    // Use awk to extract the domain part of the nameserver
+    $dnsManager = isset($matches[1][0]) ? trim(shell_exec("echo {$matches[1][0]} | awk -F'.' '{print $1}'")) : "UnknownDNSManager";
+
+    return $dnsManager;
 }
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $domainName = $_POST["domainName"];

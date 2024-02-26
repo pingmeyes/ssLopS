@@ -44,8 +44,6 @@ function simulateDaysLeftToExpire($domainName) {
 
     return $daysRemaining;
 }
-
-
 function simulateARecord($domainName) {
     // Simulate fetching ARecord based on the domain name
     // Replace this with your actual logic for obtaining ARecord
@@ -120,7 +118,7 @@ function simulateDNSManager($domainName) {
 }
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $domainName = $_POST["domainName"];
-    $projectName = $_POST["projectName"];
+    $projectName = mysqli_real_escape_string($conn, $_POST["projectName"]);
 
     // Check if the domain already exists
     $sqlCheckExistence = "SELECT * FROM ssl_details WHERE domainName = '$domainName'";

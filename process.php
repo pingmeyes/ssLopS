@@ -73,7 +73,7 @@ function simulateProvider($domainName) {
     // Simulate fetching the provider based on the domain name
     // Replace this with your actual logic for obtaining the provider
 
-    $command = "echo | openssl s_client -servername $domainName -connect $domainName:443 2>/dev/null | openssl x509 -noout -issuer | grep -oP '(?<=CN = )[^,]+'";
+    $command = "echo | openssl s_client -servername $domainName -connect $domainName:443 2>/dev/null | openssl x509 -noout -issuer | grep -oP '(?<=O = )[^,]+'";
 
     // Execute the command and get the output
     $provider = shell_exec($command);

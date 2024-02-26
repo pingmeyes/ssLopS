@@ -81,12 +81,20 @@ function simulateProvider($domainName) {
     // Check if the provider is obtained successfully
     if ($provider !== null) {
         // Trim any whitespace and return the provider name
-        return trim($provider);
+        $provider = trim($provider);
+
+        // Replace "Let's Encrypt" with "Certbot"
+        if ($provider === "Let's Encrypt") {
+            $provider = "Certbot";
+        }
+
+        return $provider;
     } else {
         // If the command fails or provider is not found, return a default value or handle accordingly
         return "UnknownProvider";
     }
 }
+
 function simulateDomainProvider($domainName) {
     // Simulate fetching the domain provider based on the domain name
     // Replace this with your actual logic for obtaining the domain provider

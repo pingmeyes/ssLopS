@@ -159,7 +159,8 @@ body {
 
     <button type="submit">Submit</button>
   </form>  
-  <h2>Upcoming Expirations</h2>
+  <div class="notification-section">
+    <h2>Upcoming Expirations</h2>
     <ul>
       <?php
       // Fetch domains with less than 30 days to expire
@@ -171,6 +172,7 @@ body {
       }
       ?>
     </ul>
+  </div>
 <div><a href="empty.php" onclick="return confirm('Are you sure you want to delete all records?');">Delete All Records</a></div>
 <div class="dashboard-section">
     <h2>Dashboard</h2>

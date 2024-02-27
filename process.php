@@ -124,20 +124,24 @@ function simulateFreePaidStatus($domainName) {
     }
 }
 function simulateDNSManager($domainName) {
-    // Simulate fetching the DNS manager based on the domain name
-    // Replace this with your actual logic for obtaining the DNS manager
+    // Replace this with your actual logic for obtaining the DNS Manager
+    $command = "nslookup -type=ns $domainName";
 
-    // Use nslookup command to get the NS records
-    $nslookupCommand = "nslookup -type=NS $domainName";
-    $result = shell_exec($nslookupCommand);
+    // Execute the command and get the output
+    $dnsManagerOutput = shell_exec($command);
 
-    // Extract the DNS manager from the result using awk
-    preg_match_all('/nameserver = (.+)/', $result, $matches);
+    // Check if DNS Manager is obtained successfully
+    if ($dnsManagerOutput !== null) {
+        // Extract relevant information from the output (adjust as needed)
+        preg_match('/nameserver = (.*)/', $dnsManagerOutput, $matches);
+        $dnsManager = isset($matches[1]) ? trim($matches[1]) : null;
 
-    // Use awk to extract the domain part of the nameserver
-    $dnsManager = isset($matches[1][0]) ? trim(shell_exec("echo {$matches[1][0]} | awk -F'.' '{print $1}'")) : "UnknownDNSManager";
-
-    return $dnsManager;
+        // Return the DNS Manager name
+        return !empty($dnsManager) ? $dnsManager : "UnknownDNSManager";
+    } else {
+        // If the command fails or DNS Manager is not found, return a default value or handle accordingly
+        return "UnknownDNSManager";
+    }
 }
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $domainName = $_POST["domainName"];

@@ -94,11 +94,27 @@ function simulateProvider($domainName) {
 }
 
 function simulateDomainProvider($domainName) {
-    // Simulate fetching the domain provider based on the domain name
-    // Replace this with your actual logic for obtaining the domain provider
+    // Execute the whois command and get the output
+    $whoisCommand = "whois $domainName";
+    $whoisOutput = shell_exec($whoisCommand);
 
-    // Example: Hardcoded value for demonstration purposes
-    return "ExampleDomainProvider";
+    // Check if the whois command is successful
+    if ($whoisOutput !== null) {
+        // Extract the domain provider information from the whois output
+        preg_match('/Registrar: (.+)$/m', $whoisOutput, $matches);
+
+        // Check if the domain provider information is obtained successfully
+        if (isset($matches[1])) {
+            // Trim any whitespace and return the domain provider name
+            return trim($matches[1]);
+        } else {
+            // If the domain provider information is not found, return a default value or handle accordingly
+            return "UnknownDomainProvider";
+        }
+    } else {
+        // If the whois command fails, return a default value or handle accordingly
+        return "UnknownDomainProvider";
+    }
 }
 function simulateFreePaidStatus($domainName) {
     // Simulate fetching SSL certificate details based on the domain name

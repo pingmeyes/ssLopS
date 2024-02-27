@@ -132,10 +132,10 @@ body {
 <body>
 
 <div class="sidenav">
-  <a href="#about">SSL Manager</a>
-  <a href="#services">Resource Analyzer</a>
-  <a href="#clients">Cost monitor</a>
-  <a href="#contact">Documents</a>
+  <a href="#sslmanager">SSL Manager</a>
+  <a href="#RA">Resource Analyzer</a>
+  <a href="#cm">Cost monitor</a>
+  <a href="#docs">Documents</a>
 </div>
 
 <div class="main">

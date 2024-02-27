@@ -1,5 +1,4 @@
 <?php
-echo "ID: " . $_POST["id"]; // Add this line for debugging
 session_start();
 
 // Check if the user is not logged in, redirect to the login page
@@ -36,15 +35,24 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["id"])) {
         $_SESSION['message_color'] = 'red';
     }
 
+    // Log messages for debugging
+    error_log("ID: " . $_POST["id"]);
+    error_log("Message: " . $_SESSION['message']);
+    error_log("Message Color: " . $_SESSION['message_color']);
+
     // Close the database connection
     $conn->close();
-
-    // Redirect back to the dashboard
-    header("Location: index.php");
-    exit();
 } else {
-    // Invalid request, redirect to the dashboard
+    // Invalid request, log and redirect to the dashboard
+    error_log("Invalid request to delete.php");
     header("Location: index.php");
     exit();
 }
+
+// Introduce a delay for debugging
+sleep(5);
+
+// Redirect back to the dashboard
+header("Location: index.php");
+exit();
 ?>

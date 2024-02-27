@@ -176,7 +176,7 @@ body {
           <th>SSL Status</th>
           <th>Days Left to Expire</th>
           <th>A Record</th>
-          <th>Provider</th>
+          <th>SSL Provider</th>
           <th>Free/Paid</th>
           <th>DNS Manager</th>
           <th>Domain provider</th>

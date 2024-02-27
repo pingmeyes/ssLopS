@@ -135,10 +135,14 @@ function simulateDNSManager($domainName) {
     // Check if the whois output is obtained successfully
     if ($whoisOutput !== null) {
         // Check for common DNS management services in the whois output
-        if (strpos($whoisOutput, 'Name Server: ns1.') !== false || strpos($whoisOutput, 'DNSSEC: unsigned') !== false) {
-            return "UnknownDNSManager";
-        } elseif (strpos($whoisOutput, 'Name Server: ns-cloud-') !== false) {
-            return "Google Cloud DNS"; // Replace with the actual DNS manager name
+        $ns1Position = strpos($whoisOutput, 'Name Server: ns1.');
+        if ($ns1Position !== false) {
+            // Extract the word following "ns1."
+            $startIndex = $ns1Position + strlen('Name Server: ns1.');
+            $endIndex = strpos($whoisOutput, ' ', $startIndex);
+            $dnsManager = substr($whoisOutput, $startIndex, $endIndex - $startIndex);
+
+            return $dnsManager;
         } else {
             return "UnknownDNSManager";
         }

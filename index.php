@@ -44,10 +44,10 @@ body {
 body {
       font-family: Arial, sans-serif;
     }
-    form {
-      margin-left: 20px; /* Adjust this value as needed */
+    form.left-form {
+      width: 100%; /* Set the form to take full width */
       max-width: 400px;
-      margin: 20px auto;
+      margin: 20px 0; /* Adjust the top and bottom margin as needed */
     }
     label {
       display: block;

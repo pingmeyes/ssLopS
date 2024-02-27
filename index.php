@@ -158,22 +158,7 @@ body {
     </select>
 
     <button type="submit">Submit</button>
-  </form>
-  <div class="notification-section">
-    <h2>Upcoming Expirations</h2>
-    <ul>
-      <?php
-      // Fetch domains with less than 30 days to expire
-      $sqlUpcomingExpirations = "SELECT * FROM ssl_details WHERE DaysLeftToExpire < 30";
-      $resultUpcomingExpirations = $conn->query($sqlUpcomingExpirations);
-
-      while ($rowUpcoming = $resultUpcomingExpirations->fetch_assoc()) {
-        echo '<li>' . $rowUpcoming['domainName'] . ' - ' . $rowUpcoming['DaysLeftToExpire'] . ' days</li>';
-      }
-      ?>
-    </ul>
-  </div>
-
+  </form>  
 <div><a href="empty.php" onclick="return confirm('Are you sure you want to delete all records?');">Delete All Records</a></div>
 <div class="dashboard-section">
     <h2>Dashboard</h2>

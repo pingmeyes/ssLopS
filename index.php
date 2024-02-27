@@ -45,7 +45,7 @@ body {
       font-family: Arial, sans-serif;
     }
     form {
-      margin-left: 160px;
+      margin-left: 20px;
       max-width: 400px;
       margin: 20px auto;
     }

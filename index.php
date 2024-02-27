@@ -236,15 +236,12 @@ body {
             echo '<td>' . $row['DNSManager'] . '</td>';
             echo '<td>' . $row['DomainProvider'] . '</td>';
             echo '<td>';
-    
             // Styled delete button
             echo '<form action="delete.php" method="post" style="display:inline-block; margin-right: 5px;">';
             echo '<input type="hidden" name="id" value="' . $row['id'] . '">';
-            echo '<button type="submit" onclick="return confirm(\'Are you sure you want to delete this record?\');" style="background-color: #f44336; color: white; border: none; padding: 8px 12px; cursor: pointer; border-radius: 4px;">Delete</button>';
+            echo '<button type="submit" name="deleteBtn" style="background-color: #f44336; color: white; border: none; padding: 8px 12px; cursor: pointer; border-radius: 4px;">Delete</button>';
             echo '</form>';
-            
             // Add more action buttons if needed
-            
             echo '</td>';
             echo '</tr>';
         }

@@ -124,30 +124,21 @@ function simulateFreePaidStatus($domainName) {
     }
 }
 function simulateDNSManager($domainName) {
-    // Simulate fetching the DNS manager based on the domain name
-    // Replace this with your actual logic for obtaining the DNS manager
-
-    $command = "whois $domainName";
+    // Replace this with your actual logic for obtaining the DNS Manager
+    $command = "dig +short NS $domainName";
 
     // Execute the command and get the output
-    $whoisOutput = shell_exec($command);
+    $dnsManager = shell_exec($command);
 
-    // Check if the whois output is obtained successfully
-    if ($whoisOutput !== null) {
-        // Check for common DNS management services in the whois output
-        $ns1Position = strpos($whoisOutput, 'Name Server: ns1.');
-        if ($ns1Position !== false) {
-            // Extract the word following "ns1."
-            $startIndex = $ns1Position + strlen('Name Server: ns1.');
-            $endIndex = strpos($whoisOutput, ' ', $startIndex);
-            $dnsManager = substr($whoisOutput, $startIndex, $endIndex - $startIndex);
+    // Check if DNS Manager is obtained successfully
+    if ($dnsManager !== null) {
+        // Extract relevant information from the output (adjust as needed)
+        $dnsManager = trim($dnsManager);
 
-            return $dnsManager;
-        } else {
-            return "UnknownDNSManager";
-        }
+        // Return the DNS Manager name
+        return !empty($dnsManager) ? $dnsManager : "UnknownDNSManager";
     } else {
-        // If the command fails or DNS manager is not found, return a default value or handle accordingly
+        // If the command fails or DNS Manager is not found, return a default value or handle accordingly
         return "UnknownDNSManager";
     }
 }

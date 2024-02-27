@@ -187,6 +187,10 @@ body {
       <tbody>
         <?php
         session_start();
+        if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
+          header("Location: login.php");
+          exit();
+        ß}
         $servername = "localhost";
         $username = "root";
         $password = "root";

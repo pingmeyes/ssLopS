@@ -128,6 +128,26 @@ body {
 
     .renew-button:hover {
       background-color: #45a049;
+    
+    .notification-section {
+      margin-left: 20px;
+      padding: 20px;
+      background-color: #f2f2f2;
+      border-radius: 5px;
+    }
+
+.notification-section h2 {
+  margin-bottom: 10px;
+}
+
+.notification-section ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.notification-section li {
+  margin-bottom: 5px;
+}  
 </style>
 </head>
 <body>
@@ -159,6 +179,21 @@ body {
 
     <button type="submit">Submit</button>
   </form>
+  <div class="notification-section">
+    <h2>Upcoming Expirations</h2>
+    <ul>
+      <?php
+      // Fetch domains with less than 30 days to expire
+      $sqlUpcomingExpirations = "SELECT * FROM ssl_details WHERE DaysLeftToExpire < 30";
+      $resultUpcomingExpirations = $conn->query($sqlUpcomingExpirations);
+
+      while ($rowUpcoming = $resultUpcomingExpirations->fetch_assoc()) {
+        echo '<li>' . $rowUpcoming['domainName'] . ' - ' . $rowUpcoming['DaysLeftToExpire'] . ' days</li>';
+      }
+      ?>
+    </ul>
+  </div>
+
   <div><a href="empty.php" onclick="return confirm('Are you sure you want to delete all records?');">Delete All Records</a></div>
 <div class="dashboard-section">
     <h2>Dashboard</h2>

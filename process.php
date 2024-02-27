@@ -124,22 +124,26 @@ function simulateFreePaidStatus($domainName) {
     }
 }
 function simulateDNSManager($domainName) {
-    // Replace this with your actual logic for obtaining the DNS Manager
-    $command = "nslookup -type=ns $domainName";
+    // Simulate fetching the DNS manager based on the domain name
+    // Replace this with your actual logic for obtaining the DNS manager
+
+    $command = "whois $domainName";
 
     // Execute the command and get the output
-    $dnsManagerOutput = shell_exec($command);
+    $whoisOutput = shell_exec($command);
 
-    // Check if DNS Manager is obtained successfully
-    if ($dnsManagerOutput !== null) {
-        // Extract relevant information from the output (adjust as needed)
-        preg_match('/nameserver = (.*)/', $dnsManagerOutput, $matches);
-        $dnsManager = isset($matches[1]) ? trim($matches[1]) : null;
-
-        // Return the DNS Manager name
-        return !empty($dnsManager) ? $dnsManager : "UnknownDNSManager";
+    // Check if the whois output is obtained successfully
+    if ($whoisOutput !== null) {
+        // Check for common DNS management services in the whois output
+        if (strpos($whoisOutput, 'Name Server: ns1.') !== false || strpos($whoisOutput, 'DNSSEC: unsigned') !== false) {
+            return "UnknownDNSManager";
+        } elseif (strpos($whoisOutput, 'Name Server: ns-cloud-') !== false) {
+            return "Google Cloud DNS"; // Replace with the actual DNS manager name
+        } else {
+            return "UnknownDNSManager";
+        }
     } else {
-        // If the command fails or DNS Manager is not found, return a default value or handle accordingly
+        // If the command fails or DNS manager is not found, return a default value or handle accordingly
         return "UnknownDNSManager";
     }
 }

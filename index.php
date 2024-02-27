@@ -45,7 +45,7 @@ body {
       font-family: Arial, sans-serif;
     }
     form {
-      margin-left: 20px;
+      margin-left: 0; /* Adjust this value as needed */
       max-width: 400px;
       margin: 20px auto;
     }

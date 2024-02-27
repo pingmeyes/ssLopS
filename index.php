@@ -158,6 +158,7 @@ body {
 
     <button type="submit">Submit</button>
   </form>
+  <div><a href="delete_records.php" onclick="return confirm('Are you sure you want to delete all records?');">Delete All Records</a></div>
 <div class="dashboard-section">
     <h2>Dashboard</h2>
     <div class="dashboard-actions">

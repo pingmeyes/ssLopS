@@ -79,7 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
     <form action="" method="post">
-        <h2>Hey Buddy</h2>
+        <h2>ssLopS</h2>
         <h2>Login</h2>
         <?php if (isset($error)) { ?>
             <p class="error"><?= $error; ?></p>

@@ -141,7 +141,7 @@ body {
 
 <div class="main">
   <h2>SSL Manager</h2>
-  <form action="/process.php" method="post">
+  <form class="left-form" action="/process.php" method="post">
     <h2>Add Domain</h2> 
     <label for="domainName">Domain name:</label>
     <input type="text" id="domainName" name="domainName" required>

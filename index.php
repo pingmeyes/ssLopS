@@ -195,7 +195,6 @@ body {
       </thead>
       <tbody>
         <?php
-        session_start();
         $servername = "localhost";
         $username = "root";
         $password = "root";

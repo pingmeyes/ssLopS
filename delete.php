@@ -7,9 +7,9 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     exit();
 }
 
-// Check if the request method is GET and the domain ID is set
-if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["id"])) {
-    $domainId = $_GET["id"];
+// Check if the request method is POST and deleteBtn is set
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["deleteBtn"])) {
+    $domainId = $_POST["id"];
 
     $servername = "localhost";
     $username = "root";
@@ -34,11 +34,6 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["id"])) {
         $_SESSION['message'] = 'Error deleting record: ' . $conn->error;
         $_SESSION['message_color'] = 'red';
     }
-
-    // Log messages for debugging
-    error_log("ID: " . $_POST["id"]);
-    error_log("Message: " . $_SESSION['message']);
-    error_log("Message Color: " . $_SESSION['message_color']);
 
     // Close the database connection
     $conn->close();

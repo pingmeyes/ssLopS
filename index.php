@@ -45,9 +45,9 @@ body {
       font-family: Arial, sans-serif;
     }
     form.left-form {
-      width: 100%; /* Set the form to take full width */
+      width: 95%; /* Set the form to take full width */
       max-width: 400px;
-      margin: 20px 0; /* Adjust the top and bottom margin as needed */
+      margin: 25px 0; /* Adjust the top and bottom margin as needed */
     }
     label {
       display: block;

@@ -128,26 +128,6 @@ body {
 
     .renew-button:hover {
       background-color: #45a049;
-    
-    .notification-section {
-      margin-left: 20px;
-      padding: 20px;
-      background-color: #f2f2f2;
-      border-radius: 5px;
-    }
-
-.notification-section h2 {
-  margin-bottom: 10px;
-}
-
-.notification-section ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-.notification-section li {
-  margin-bottom: 5px;
-}  
 </style>
 </head>
 <body>
@@ -194,7 +174,7 @@ body {
     </ul>
   </div>
 
-  <div><a href="empty.php" onclick="return confirm('Are you sure you want to delete all records?');">Delete All Records</a></div>
+<div><a href="empty.php" onclick="return confirm('Are you sure you want to delete all records?');">Delete All Records</a></div>
 <div class="dashboard-section">
     <h2>Dashboard</h2>
     <div class="dashboard-actions">

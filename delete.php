@@ -37,13 +37,13 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["id"])) {
 
     // Close the database connection
     $conn->close();
+
+    // Redirect back to the dashboard
+    header("Location: index.php");
+    exit();
 } else {
     // Invalid request, redirect to the dashboard
     header("Location: index.php");
     exit();
 }
-
-// Redirect back to the dashboard
-header("Location: index.php");
-exit();
 ?>

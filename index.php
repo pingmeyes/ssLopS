@@ -143,7 +143,7 @@ body {
 
 <div class="sidenav">
   <a href="#sslmanager">SSL Manager</a>
-  <a href="#RA">Resource Analyzer</a>
+  <a href="ra.html">Resource Analyzer</a>
   <a href="#cm">Cost monitor</a>
   <a href="#docs">Documents</a>
 </div>

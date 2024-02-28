@@ -162,8 +162,11 @@ body {
       <option value="Courier NetWork">Courier NetWork</option>
       <option value="Quavered">Quavered</option>
       <option value="Phobs">Phobs</option>
-      <option value="PCI">PCI</option>
+      <option value="32auctions">32auctions</option>
       <option value="Logoup">Logoup</option>
+      <option value="NikeSB">NikeSB</option>
+      <option value="waitrainer">waitrainer</option>
+      <option value="Acumed">Acumed</option>
     </select>
 
     <button type="submit">Submit</button>

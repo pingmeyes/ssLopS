@@ -163,7 +163,7 @@ body {
       <option value="Quavered">Quavered</option>
       <option value="Phobs">Phobs</option>
       <option value="PCI">PCI</option>
-      <option value="test">test</option>
+      <option value="Logoup">Logoup</option>
     </select>
 
     <button type="submit">Submit</button>

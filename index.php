@@ -44,17 +44,22 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
         }
 
         .main {
-            margin-left: 160px;
-            font-size: 28px;
+            margin-left: 160px; /* Same as the width of the sidenav */
+            font-size: 28px; /* Increased text to enable scrolling */
             padding: 0px 10px;
         }
 
         @media screen and (max-height: 450px) {
-            .sidenav { padding-top: 15px; }
-            .sidenav a { font-size: 18px; }
+            .sidenav {
+                padding-top: 15px;
+            }
+
+            .sidenav a {
+                font-size: 18px;
+            }
         }
 
-        .left-form {
+        form.left-form {
             width: 95%;
             max-width: 400px;
             margin: 25px 0;
@@ -65,7 +70,8 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
             margin-bottom: 8px;
         }
 
-        input, select {
+        input,
+        select {
             width: 100%;
             padding: 8px;
             margin-bottom: 16px;
@@ -82,20 +88,16 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
         }
 
         .top-right-section {
-            position: absolute;
+            position: fixed;
             top: 20px;
             right: 20px;
             color: #fff;
             font-size: 18px;
         }
 
-        .app-container {
-            display: flex;
-        }
-
         .dashboard-section {
             padding: 20px;
-            flex-grow: 1;
+            margin-top: 50px; /* Adjusted margin-top to avoid overlap with fixed top-right section */
         }
 
         .dashboard-section h2 {

@@ -203,11 +203,6 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
         <button type="submit">Submit</button>
     </form>
 
-    <div class="top-right-section">
-        <!-- Content for the top-right section goes here -->
-        Hello, this is the top-right section.
-    </div>
-
     <!-- New section for displaying domains with expiration days -->
     <div class="top-right-section">
             <h2>Expiring Domains</h2>
@@ -235,6 +230,8 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
             ?>
         </div>
         <!-- End of new section -->
+
+    <div><a href="empty.php" onclick="return confirm('Are you sure you want to delete all records?');">Delete All Records</a></div>
 
     <div class="dashboard-section">
         <h2>Dashboard</h2>

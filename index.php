@@ -44,10 +44,11 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
         }
 
         .main {
-            margin-left: 160px; /* Same as the width of the sidenav */
-            font-size: 24px; /* Increased text to enable scrolling */
-            padding: 20px 10px;
-        }
+    margin-left: 160px; /* Same as the width of the sidenav */
+    font-size: 28px; /* Increased text to enable scrolling */
+    padding: 20px 10px; /* Adjusted top and bottom padding */
+    overflow-y: auto; /* Added overflow-y to enable vertical scrolling */
+}
 
         @media screen and (max-height: 450px) {
             .sidenav {
@@ -147,26 +148,22 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
         /* New styles for highlighting expiration days */
         .expiry-box {
-            display: inline-block;
-            padding: 5px 10px;
-            border-radius: 5px;
-            font-weight: bold;
-        }
+    display: block;
+    padding: 5px 0;
+    font-weight: bold;
+}
 
-        .expiry-box-red {
-            background-color: #ff3333; /* Red for below 10 days */
-            color: #fff;
-        }
+.expiry-box-red {
+    color: #ff3333; /* Adjusted the font color for better visibility */
+}
 
-        .expiry-box-orange {
-            background-color: #ff9900; /* Orange for below 20 days */
-            color: #fff;
-        }
+.expiry-box-orange {
+    color: #ff9900;
+}
 
-        .expiry-box-dark-yellow {
-            background-color: #cc9900; /* Dark Yellow for below 30 days */
-            color: #fff;
-        }
+.expiry-box-dark-yellow {
+    color: #cc9900;
+}
     </style>
 </head>
 <body>
@@ -286,31 +283,26 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
             </tbody>
         </table>
     
-        <div class="top-right-section">
-            <h2>Expiring Domains</h2>
-            <?php
-            // Fetch domains with expiry days less than 30
-            $sqlFetchExpiring = "SELECT * FROM ssl_details WHERE DaysLeftToExpire < 30";
-            $resultFetchExpiring = $conn->query($sqlFetchExpiring);
+        <div class="expiry-box-container">
+    <?php
+    // Fetch and display expiring domains
+    while ($rowExpiring = $resultFetchExpiring->fetch_assoc()) {
+        $expiryDays = $rowExpiring['DaysLeftToExpire'];
+        $expiryClass = '';
+        if ($expiryDays < 10) {
+            $expiryClass = 'expiry-box-red';
+        } elseif ($expiryDays < 20) {
+            $expiryClass = 'expiry-box-orange';
+        } elseif ($expiryDays < 30) {
+            $expiryClass = 'expiry-box-dark-yellow';
+        }
 
-            // Loop through the rows in the result set
-            while ($rowExpiring = $resultFetchExpiring->fetch_assoc()) {
-              $expiryDays = $rowExpiring['DaysLeftToExpire'];
-              $expiryClass = '';
-              if ($expiryDays < 10) {
-                  $expiryClass = 'expiry-box-red';
-              } elseif ($expiryDays < 20) {
-                  $expiryClass = 'expiry-box-orange';
-              } elseif ($expiryDays < 30) {
-                  $expiryClass = 'expiry-box-dark-yellow';
-              }
-          
-              echo '<div class="expiry-box ' . $expiryClass . '">';
-              echo $rowExpiring['domainName'] . ' - Expires in ' . $expiryDays . ' days';
-              echo '</div><br>'; // Add a line break after each domain entry
-            }
-            ?>
-        </div>    
+        echo '<div class="expiry-box ' . $expiryClass . '">';
+        echo $rowExpiring['domainName'] . ' - Expires in ' . $expiryDays . ' days';
+        echo '</div>';
+    }
+    ?>
+</div>    
 
       </div>
 </div>

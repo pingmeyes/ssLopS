@@ -34,7 +34,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
         .sidenav a {
             padding: 6px 8px 6px 16px;
             text-decoration: none;
-            font-size: 25px;
+            font-size: 20px;
             color: #818181;
             display: block;
         }
@@ -45,8 +45,8 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
         .main {
             margin-left: 160px; /* Same as the width of the sidenav */
-            font-size: 28px; /* Increased text to enable scrolling */
-            padding: 0px 10px;
+            font-size: 24px; /* Increased text to enable scrolling */
+            padding: 20px 10px;
         }
 
         @media screen and (max-height: 450px) {
@@ -91,7 +91,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
             position: fixed;
             top: 20px;
             right: 20px;
-            color: #fff;
+            color: #000; /* Changed text color for visibility */
             font-size: 18px;
         }
 
@@ -143,6 +143,29 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
         .renew-button:hover {
             background-color: #45a049;
+        }
+
+        /* New styles for highlighting expiration days */
+        .expiry-box {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .expiry-box-red {
+            background-color: #ff3333; /* Red for below 10 days */
+            color: #fff;
+        }
+
+        .expiry-box-orange {
+            background-color: #ff9900; /* Orange for below 20 days */
+            color: #fff;
+        }
+
+        .expiry-box-dark-yellow {
+            background-color: #cc9900; /* Dark Yellow for below 30 days */
+            color: #fff;
         }
     </style>
 </head>

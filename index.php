@@ -143,6 +143,7 @@ body {
     }
     .renew-button:hover {
       background-color: #45a049;
+    }
 </style>
 </head>
 <body>
@@ -177,8 +178,12 @@ body {
 
     <button type="submit">Submit</button>
   </form>
-  Hello
-<div><a href="empty.php" onclick="return confirm('Are you sure you want to delete all records?');">Delete All Records</a></div>
+  <div class="top-right-section">
+    <!-- Content for the top-right section goes here -->
+    Hello, this is the top-right section.
+  </div>
+  <div><a href="empty.php" onclick="return confirm('Are you sure you want to delete all records?');">Delete All Records</a></div>
+</div>
 <div class="dashboard-section">
     <h2>Dashboard</h2>
     <div class="dashboard-actions">
@@ -260,7 +265,6 @@ body {
     </tbody>
     </table>
   </div>
-</div>
-   
+</div>   
 </body>
 </html>

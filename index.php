@@ -178,13 +178,8 @@ body {
 
     <button type="submit">Submit</button>
   </form>
-  <div class="top-right-section">
-    <!-- Content for the top-right section goes here -->
-    Hello, this is the top-right section.
-  </div>
   <div><a href="empty.php" onclick="return confirm('Are you sure you want to delete all records?');">Delete All Records</a></div>
-</div>
-<div class="dashboard-section">
+  <div class="dashboard-section">
     <h2>Dashboard</h2>
     <div class="dashboard-actions">
         <div class="search-bar-container">
@@ -265,6 +260,7 @@ body {
     </tbody>
     </table>
   </div>
-</div>   
+</div>
+   
 </body>
 </html>

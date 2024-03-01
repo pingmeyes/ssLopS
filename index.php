@@ -201,7 +201,26 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     </form>
 
     <div><a href="empty.php" onclick="return confirm('Are you sure you want to delete all records?');">Delete All Records</a></div>
+    <div class="expiry-box-container">
+    <?php
+    // Fetch and display expiring domains
+    while ($rowExpiring = $resultFetchExpiring->fetch_assoc()) {
+        $expiryDays = $rowExpiring['DaysLeftToExpire'];
+        $expiryClass = '';
+        if ($expiryDays < 10) {
+            $expiryClass = 'expiry-box-red';
+        } elseif ($expiryDays < 20) {
+            $expiryClass = 'expiry-box-orange';
+        } elseif ($expiryDays < 30) {
+            $expiryClass = 'expiry-box-dark-yellow';
+        }
 
+        echo '<div class="expiry-box ' . $expiryClass . '">';
+        echo $rowExpiring['domainName'] . ' - Expires in ' . $expiryDays . ' days';
+        echo '</div>';
+    }
+    ?>
+  </div>
     <div class="dashboard-section">
         <h2>Dashboard</h2>
         <div class="dashboard-actions">
@@ -283,26 +302,6 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
             </tbody>
         </table>
     
-        <div class="expiry-box-container">
-    <?php
-    // Fetch and display expiring domains
-    while ($rowExpiring = $resultFetchExpiring->fetch_assoc()) {
-        $expiryDays = $rowExpiring['DaysLeftToExpire'];
-        $expiryClass = '';
-        if ($expiryDays < 10) {
-            $expiryClass = 'expiry-box-red';
-        } elseif ($expiryDays < 20) {
-            $expiryClass = 'expiry-box-orange';
-        } elseif ($expiryDays < 30) {
-            $expiryClass = 'expiry-box-dark-yellow';
-        }
-
-        echo '<div class="expiry-box ' . $expiryClass . '">';
-        echo $rowExpiring['domainName'] . ' - Expires in ' . $expiryDays . ' days';
-        echo '</div>';
-    }
-    ?>
-</div>    
 
       </div>
 </div>

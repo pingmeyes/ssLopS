@@ -295,19 +295,19 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
             // Loop through the rows in the result set
             while ($rowExpiring = $resultFetchExpiring->fetch_assoc()) {
-                $expiryDays = $rowExpiring['DaysLeftToExpire'];
-                $expiryClass = '';
-                if ($expiryDays < 10) {
-                    $expiryClass = 'expiry-box-red';
-                } elseif ($expiryDays < 20) {
-                    $expiryClass = 'expiry-box-orange';
-                } elseif ($expiryDays < 30) {
-                    $expiryClass = 'expiry-box-dark-yellow';
-                }
-
-                echo '<div class="expiry-box ' . $expiryClass . '">';
-                echo $rowExpiring['domainName'] . ' - Expires in ' . $expiryDays . ' days';
-                echo '</div>';
+              $expiryDays = $rowExpiring['DaysLeftToExpire'];
+              $expiryClass = '';
+              if ($expiryDays < 10) {
+                  $expiryClass = 'expiry-box-red';
+              } elseif ($expiryDays < 20) {
+                  $expiryClass = 'expiry-box-orange';
+              } elseif ($expiryDays < 30) {
+                  $expiryClass = 'expiry-box-dark-yellow';
+              }
+          
+              echo '<div class="expiry-box ' . $expiryClass . '">';
+              echo $rowExpiring['domainName'] . ' - Expires in ' . $expiryDays . ' days';
+              echo '</div><br>'; // Add a line break after each domain entry
             }
             ?>
         </div>    

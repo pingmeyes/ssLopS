@@ -134,7 +134,13 @@ body {
       border-radius: 4px;
       cursor: pointer;
     }
-
+    .top-right-section {
+      position: absolute;
+      top: 20px; /* Adjust the top position as needed */
+     right: 20px; /* Adjust the right position as needed */
+     color: #fff;
+      font-size: 18px;
+    }
     .renew-button:hover {
       background-color: #45a049;
 </style>

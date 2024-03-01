@@ -215,31 +215,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                 </form>
             </div>
         </div>
-        <div class="top-right-section">
-            <h2>Expiring Domains</h2>
-            <?php
-            // Fetch domains with expiry days less than 30
-            $sqlFetchExpiring = "SELECT * FROM ssl_details WHERE DaysLeftToExpire < 30";
-            $resultFetchExpiring = $conn->query($sqlFetchExpiring);
-
-            // Loop through the rows in the result set
-            while ($rowExpiring = $resultFetchExpiring->fetch_assoc()) {
-                $expiryDays = $rowExpiring['DaysLeftToExpire'];
-                $expiryClass = '';
-                if ($expiryDays < 10) {
-                    $expiryClass = 'expiry-box-red';
-                } elseif ($expiryDays < 20) {
-                    $expiryClass = 'expiry-box-orange';
-                } elseif ($expiryDays < 30) {
-                    $expiryClass = 'expiry-box-dark-yellow';
-                }
-
-                echo '<div class="expiry-box ' . $expiryClass . '">';
-                echo $rowExpiring['domainName'] . ' - Expires in ' . $expiryDays . ' days';
-                echo '</div>';
-            }
-            ?>
-        </div>
+  
         <table class="domain-table">
             <thead>
             <tr>
@@ -309,7 +285,34 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
             ?>
             </tbody>
         </table>
-    </div>
+    
+        <div class="top-right-section">
+            <h2>Expiring Domains</h2>
+            <?php
+            // Fetch domains with expiry days less than 30
+            $sqlFetchExpiring = "SELECT * FROM ssl_details WHERE DaysLeftToExpire < 30";
+            $resultFetchExpiring = $conn->query($sqlFetchExpiring);
+
+            // Loop through the rows in the result set
+            while ($rowExpiring = $resultFetchExpiring->fetch_assoc()) {
+                $expiryDays = $rowExpiring['DaysLeftToExpire'];
+                $expiryClass = '';
+                if ($expiryDays < 10) {
+                    $expiryClass = 'expiry-box-red';
+                } elseif ($expiryDays < 20) {
+                    $expiryClass = 'expiry-box-orange';
+                } elseif ($expiryDays < 30) {
+                    $expiryClass = 'expiry-box-dark-yellow';
+                }
+
+                echo '<div class="expiry-box ' . $expiryClass . '">';
+                echo $rowExpiring['domainName'] . ' - Expires in ' . $expiryDays . ' days';
+                echo '</div>';
+            }
+            ?>
+        </div>    
+
+      </div>
 </div>
 
 </body>

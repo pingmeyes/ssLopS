@@ -228,7 +228,6 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                 echo '</div>';
             }
             ?>
-        </div>
         <!-- End of new section -->
 
     <div><a href="empty.php" onclick="return confirm('Are you sure you want to delete all records?');">Delete All Records</a></div>

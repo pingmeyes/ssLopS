@@ -86,6 +86,9 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
             border-radius: 5px;
             cursor: pointer;
         }
+        .top-right-section {
+           position: fixed;
+        }
 
          /* To make the list vertical */
         .expiry-box-list {

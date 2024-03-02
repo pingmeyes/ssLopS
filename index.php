@@ -88,12 +88,14 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
         }
 
         .top-right-section {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            color: #000; /* Changed text color for visibility */
-            font-size: 18px;
-        }
+    position: fixed;
+    top: 20px; /* Adjust top position if needed */
+    right: 20px; /* Adjust right position if needed */
+    color: #fff;
+    font-size: 18px;
+    border: 1px solid #000; /* Add border with black color */
+    padding: 10px; /* Add padding to the box */
+}
 
         .dashboard-section {
             padding: 20px;
@@ -288,13 +290,13 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     
         <div class="top-right-section">
             <h2>Expiring Domains</h2>
-            <?php
-            // Fetch domains with expiry days less than 30
-            $sqlFetchExpiring = "SELECT * FROM ssl_details WHERE DaysLeftToExpire < 30";
-            $resultFetchExpiring = $conn->query($sqlFetchExpiring);
+            <!-- Display expiring domains within the main content -->
+<?php
+// Fetch domains with expiry days less than 30
+$sqlFetchExpiring = "SELECT * FROM ssl_details WHERE DaysLeftToExpire < 30";
+$resultFetchExpiring = $conn->query($sqlFetchExpiring);
 
-            // Loop through the rows in the result set
-            while ($rowExpiring = $resultFetchExpiring->fetch_assoc()) {
+while ($rowExpiring = $resultFetchExpiring->fetch_assoc()) {
     $expiryDays = $rowExpiring['DaysLeftToExpire'];
     $expiryClass = '';
     if ($expiryDays < 10) {
@@ -307,9 +309,10 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
     echo '<div class="expiry-box ' . $expiryClass . '">';
     echo $rowExpiring['domainName'] . ' - Expires in ' . $expiryDays . ' days';
-    echo '</div><br>'; // Add a line break after each domain entry
+    echo '</div>';
 }
-            ?>
+?>
+
         </div>    
 
       </div>

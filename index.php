@@ -104,9 +104,14 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
            margin-top: 10px; /* Adjust margin as needed */
         }
         .dashboard-section {
-            padding: 20px;
-            margin-top: 50px; /* Adjusted margin-top to avoid overlap with fixed top-right section */
-        }
+    padding: 20px;
+    margin-top: 50px; /* Adjusted margin-top to avoid overlap with fixed top-right section */
+    margin-right: 220px; /* Added margin to the right to create space for fixed top-right section */
+    background-color: #fff; /* Added a background color to hide content behind the fixed section */
+    position: relative; /* Ensure relative positioning for absolute child elements */
+    z-index: 0; /* Lower z-index to keep the content behind the fixed section */
+}
+
 
         .dashboard-section h2 {
             margin-bottom: 20px;

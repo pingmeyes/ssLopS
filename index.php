@@ -94,7 +94,6 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
            font-size: 18px;
            border: 1px solid #000; /* Add border with black color */
            padding: 10px; /* Add padding to the box */
-           display: inline-block; /* Display as block to prevent filling to the left */
            white-space: nowrap; /* Prevent wrapping to the next line */
         }
 

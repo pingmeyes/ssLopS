@@ -163,18 +163,20 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
         }
 
         .expiry-box-red {
-            background-color: #ff3333; /* Red for below 10 days */
-            color: #fff;
+             /* Red for below 10 days */
+            color: #A91A21;
+            margin-bottom: 10px;
         }
 
         .expiry-box-orange {
-            background-color: #ff9900; /* Orange for below 20 days */
-            color: #fff;
+             /* Orange for below 20 days */
+            color: #ff9900;
+            margin-bottom: 10px;
         }
 
         .expiry-box-dark-yellow {
-            background-color: #cc9900; /* Dark Yellow for below 30 days */
-            color: #fff;
+             /* Dark Yellow for below 30 days */
+            color: #EBD40B;
         }
         .top-right-sec h2{
           color: #000;

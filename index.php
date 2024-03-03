@@ -46,7 +46,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
         .main {
             margin-left: 160px; /* Same as the width of the sidenav */
             font-size: 24px; /* Increased text to enable scrolling */
-            padding: 20px 10px;
+            padding: 20px 0 20px 10px;
         }
 
         @media screen and (max-height: 450px) {
@@ -86,16 +86,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
             border-radius: 5px;
             cursor: pointer;
         }
-        .top-right-section {
-           position: fixed;
-           top: 20px; /* Adjust top position if needed */
-           right: 20px; /* Adjust right position if needed */
-           color: #fff;
-           font-size: 20px;
-           border: 2px solid #000; /* Add border with black color */
-           padding: 10px; /* Add padding to the box */
-           white-space: nowrap; /* Prevent wrapping to the next line */
-        }
+        
 
          /* To make the list vertical */
         .expiry-box-list {
@@ -165,29 +156,32 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
         .expiry-box-red {
              /* Red for below 10 days */
             color: #000;
-            margin-bottom: 10px;
-            background: #A91A21;
+            
         }
 
         .expiry-box-orange {
              /* Orange for below 20 days */
             color: #000;
-            margin-bottom: 10px;
-            background: #ff9900;
+            
         }
 
         .expiry-box-dark-yellow {
              /* Dark Yellow for below 30 days */
             color: #000;
-            background: #EBD40B;
+            
         }
         .top-right-sec h2{
           color: #000;
+          text-align:center;
+          
+        }
+        .top-right-sec {
+          background:
         }
         .ssl-exp{
           display:flex;
           justify-content:space-between;
-          padding: 0 20px 0 20px;
+          padding: 0 0 0 20px;
         }
         
     </style>
@@ -204,10 +198,10 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
   <div class="ssl-exp">
 
   <div class="ffsfj">
-    <h2>SSL Manager</h2>
+    
 
     <form class="left-form" action="/process.php" method="post">
-        <h2>Add Domain</h2>
+        <h1>Add Domain</h1>
         <label for="domainName">Domain name:</label>
         <input type="text" id="domainName" name="domainName" required>
 
@@ -233,7 +227,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     <div><a href="empty.php" onclick="return confirm('Are you sure you want to delete all records?');">Delete All Records</a></div>
     </div>
     <div class="top-right-sec">
-        <h2>Expiring Domains</h2>
+        <h4>Expiring Domains</h4>
         <!-- Display expiring domains within the main content -->
         <?php
         $servername = "localhost";

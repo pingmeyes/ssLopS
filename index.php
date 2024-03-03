@@ -46,7 +46,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
         .main {
             margin-left: 160px; /* Same as the width of the sidenav */
             font-size: 24px; /* Increased text to enable scrolling */
-            padding: 20px 0 20px 10px;
+            padding: 0 0 20px 10px;
         }
 
         @media screen and (max-height: 450px) {
@@ -60,8 +60,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
         }
 
         form.left-form {
-            width: 95%;
-            max-width: 400px;
+            width: 100%;
             margin: 25px 0;
         }
 
@@ -171,12 +170,14 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
             
         }
         .top-right-sec h2{
-          color: #000;
+          color: #00000082;
           text-align:center;
           
         }
         .top-right-sec {
-          background:
+          padding: 15px 20px 15px 20px;
+          background:#4caf5033;
+          border-radius:30px 0 30px 30px; 
         }
         .ssl-exp{
           display:flex;

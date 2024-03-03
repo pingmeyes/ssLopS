@@ -182,6 +182,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
         .ssl-exp{
           display:flex;
           justify-content:space-between;
+          padding: 0 20px 0 20px;
         }
         
     </style>

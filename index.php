@@ -161,19 +161,19 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
         .expiry-box-orange {
              /* Orange for below 20 days */
-            color: #9f5252bd;
+            color: #000;
             padding:10px 0 10px 0;
             
         }
 
         .expiry-box-dark-yellow {
              /* Dark Yellow for below 30 days */
-            color: #00000096;
+            color: #000;
             padding:10px 0 10px 0;
             
         }
         .top-right-sec h4{
-          color: #00000082;
+          color: #000;
           text-align:center;
           
         }

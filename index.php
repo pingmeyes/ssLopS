@@ -154,22 +154,25 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
         .expiry-box-red {
              /* Red for below 10 days */
-            color: #000;
+            color: #ff3737;
+            padding:0 10px 0 10px;
             
         }
 
         .expiry-box-orange {
              /* Orange for below 20 days */
-            color: #000;
+            color: #9f5252bd;
+            padding:0 10px 0 10px;
             
         }
 
         .expiry-box-dark-yellow {
              /* Dark Yellow for below 30 days */
-            color: #000;
+            color: #00000096;
+            padding:0 10px 0 10px;
             
         }
-        .top-right-sec h2{
+        .top-right-sec h4{
           color: #00000082;
           text-align:center;
           

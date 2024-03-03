@@ -71,7 +71,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
         input,
         select {
-            width: 350px;
+            width: 100%;
             padding: 8px;
             margin-bottom: 16px;
             box-sizing: border-box;
@@ -210,7 +210,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     <form class="left-form" action="/process.php" method="post">
         <h1>Add Domain</h1>
         <label for="domainName">Domain name:</label>
-        <input type="text" id="domainName" name="domainName" required>
+        <input style="width:400px" type="text" id="domainName" name="domainName" required>
 
         <label for="projectName">Project name:</label>
         <select id="projectName" name="projectName" required>

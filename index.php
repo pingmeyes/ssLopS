@@ -159,10 +159,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
         /* New styles for highlighting expiration days */
         .expiry-box {
-            display: inline-block;
-            padding: 5px 10px;
-            border-radius: 5px;
-            font-weight: bold;
+            
         }
 
         .expiry-box-red {
@@ -184,6 +181,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
         }
         .ssl-exp{
           display:flex;
+          justify-content:space-between;
         }
         
     </style>

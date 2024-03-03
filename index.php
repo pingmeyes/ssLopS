@@ -156,7 +156,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
              /* Red for below 10 days */
             color: #ff3737;
             padding:10px 0 10px 0;
-            text-align:center;
+            
             
         }
 
@@ -164,7 +164,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
              /* Orange for below 20 days */
             color: #000;
             padding:10px 0 10px 0;
-            text-align:center;
+            
             
         }
 
@@ -172,7 +172,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
              /* Dark Yellow for below 30 days */
             color: #000;
             padding:10px 0 10px 0;
-            text-align:center;
+            
             
         }
         .top-right-sec h4{

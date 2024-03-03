@@ -179,6 +179,13 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
             background-color: #cc9900; /* Dark Yellow for below 30 days */
             color: #fff;
         }
+        .top-right-sec h2{
+          color: #000;
+        }
+        .ssl-exp{
+          display:flex;
+        }
+        
     </style>
 </head>
 <body>
@@ -190,6 +197,8 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 </div>
 
 <div class="main">
+  <div class="ssl-exp">
+
   <div class="ffsfj">
     <h2>SSL Manager</h2>
 
@@ -219,7 +228,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
       
     <div><a href="empty.php" onclick="return confirm('Are you sure you want to delete all records?');">Delete All Records</a></div>
     </div>
-    <div class="top-right-section">
+    <div class="top-right-sec">
         <h2>Expiring Domains</h2>
         <!-- Display expiring domains within the main content -->
         <?php
@@ -256,6 +265,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
         }
         ?>
     </div>
+      </div>
     <div class="dashboard-section">
         <h2>Dashboard</h2>
         <div class="dashboard-actions">

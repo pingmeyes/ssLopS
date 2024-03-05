@@ -276,10 +276,11 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
         <div class="dashboard-actions">
             <div class="search-bar-container">
                 <input class="search-bar" placeholder="Search..." type="text">
+                <button type="submit">Search</button>
                 <form action="refresh.php" method="post">
                     <button type="submit">Refresh</button>
                 </form>
-            </div>
+            </div>  
         </div>
   
         <table class="domain-table">
@@ -311,6 +312,15 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
             if ($conn->connect_error) {
                 die("Connection failed: " . $conn->connect_error);
             }
+            // Check if the search form is submitted
+if (isset($_POST['search-bar']) && !empty($_POST['search-bar'])) {
+  $searchTerm = $_POST['search-bar'];
+  // Modify the SQL query to include the search term
+  $sqlFetchAll = "SELECT * FROM ssl_details WHERE domainName LIKE '%$searchTerm%' OR projectName LIKE '%$searchTerm%'";
+} else {
+  // Default query without filtering
+  $sqlFetchAll = "SELECT * FROM ssl_details";
+}
             // Display success or error message
            if (isset($_SESSION['message'])) {
                $message = $_SESSION['message'];

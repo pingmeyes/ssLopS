@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Replace these values with your actual credentials
     $validUsername = "sanjai";
-    $validPassword = "sanjaisubash2000";
+    $validPassword = "sanjaisubash";
 
     if ($username === $validUsername && $password === $validPassword) {
         // Valid credentials, set a session variable to mark the user as logged in

@@ -4,8 +4,8 @@ session_start();
 
 // Database connection details
 $servername = "localhost";
-$username = "your_username"; // Replace with your database username
-$password = "your_password"; // Replace with your database password
+$username = "root"; // Replace with your database username
+$password = "root"; // Replace with your database password
 $dbname = "domaindetails"; // Replace with your database name
 
 // Create connection

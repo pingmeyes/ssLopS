@@ -274,9 +274,10 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     <div class="dashboard-section">
         <h2>Dashboard</h2>
         <div class="dashboard-actions">
-            <div class="search-bar-container">
-                <input class="search-bar" placeholder="Search..." type="text">
-                <button type="submit">Search</button>
+          <form action="search.php" method="post">
+            <input class="search-bar" placeholder="Search..." type="text" name="search-bar">
+            <button type="submit">Search</button>
+          </form>
                 <form action="refresh.php" method="post">
                     <button type="submit">Refresh</button>
                 </form>

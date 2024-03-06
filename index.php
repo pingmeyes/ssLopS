@@ -333,7 +333,9 @@ if (isset($_POST['search-bar']) && !empty($_POST['search-bar'])) {
               unset($_SESSION['message']);
               unset($_SESSION['message_color']);
             }
-            
+            // Fetch all records from the database for the dashboard
+            $sqlFetchAll = "SELECT * FROM ssl_details";
+            $resultFetchAll = $conn->query($sqlFetchAll);
     
             // Loop through the rows in the result set
             while ($row = $resultFetchAll->fetch_assoc()) {

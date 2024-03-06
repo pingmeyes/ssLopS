@@ -301,66 +301,77 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
             </thead>
             <tbody>
             <?php
-            $servername = "localhost";
-            $username = "root";
-            $password = "root";
-            $dbname = "domaindetails";
-    
-            // Create connection
-            $conn = new mysqli($servername, $username, $password, $dbname);
-    
-            // Check connection
-            if ($conn->connect_error) {
-                die("Connection failed: " . $conn->connect_error);
-            }
-            // Check if the search form is submitted
+
+// Database connection details
+$servername = "localhost";
+$username = "root";
+$password = "root";
+$dbname = "domaindetails";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Check if the search form is submitted
 if (isset($_POST['search-bar']) && !empty($_POST['search-bar'])) {
-  $searchTerm = $_POST['search-bar'];
-  // Modify the SQL query to include the search term
-  $sqlFetchAll = "SELECT * FROM ssl_details WHERE domainName LIKE '%$searchTerm%' OR projectName LIKE '%$searchTerm%'";
-
+    $searchTerm = $_POST['search-bar'];
+    // Modify the SQL query to include the search term
+    $sqlFetchAll = "SELECT * FROM ssl_details WHERE domainName LIKE '%$searchTerm%' OR projectName LIKE '%$searchTerm%'";
 } else {
-  
+    // Default query without filtering
+    $sqlFetchAll = "SELECT * FROM ssl_details";
+}
 
-            // Display success or error message
-           if (isset($_SESSION['message'])) {
-               $message = $_SESSION['message'];
-               $message_color = isset($_SESSION['message_color']) ? $_SESSION['message_color'] : 'black';
-    
-               echo '<p style="color: ' . $message_color . ';">' . $message . '</p>';
-    
-              // Clear the session message
-              unset($_SESSION['message']);
-              unset($_SESSION['message_color']);
-            }
-            // Fetch all records from the database for the dashboard
-            $sqlFetchAll = "SELECT * FROM ssl_details";
-            $resultFetchAll = $conn->query($sqlFetchAll);
-    
-            // Loop through the rows in the result set
-            while ($row = $resultFetchAll->fetch_assoc()) {
-                echo '<tr>';
-                echo '<td>' . $row['domainName'] . '</td>';
-                echo '<td>' . $row['projectName'] . '</td>';
-                echo '<td>' . $row['SSLStatus'] . '</td>';
-                echo '<td>' . $row['DaysLeftToExpire'] . ' days</td>';
-                echo '<td>' . $row['ARecord'] . '</td>';
-                echo '<td>' . $row['Provider'] . '</td>';
-                echo '<td>' . $row['FreeorPaid'] . '</td>';
-                echo '<td>' . $row['DNSManager'] . '</td>';
-                echo '<td>' . $row['DomainProvider'] . '</td>';
-                echo '<td>';
-                // Styled delete button
-                echo '<form action="delete.php" method="post" style="display:inline-block; margin-right: 5px;">';
-                echo '<input type="hidden" name="id" value="' . $row['id'] . '">';
-                echo '<button type="submit" name="deleteBtn" style="background-color: #f44336; color: white; border: none; padding: 8px 12px; cursor: pointer; border-radius: 4px;">Delete</button>';
-                echo '</form>';
-                // Add more action buttons if needed
-                echo '</td>';
-                echo '</tr>';
-            }
-}    
-            ?>
+// Execute the query
+$resultFetchAll = $conn->query($sqlFetchAll);
+
+// Check if any results were found
+if ($resultFetchAll->num_rows > 0) {
+    // Display success or error message
+    if (isset($_SESSION['message'])) {
+        $message = $_SESSION['message'];
+        $message_color = isset($_SESSION['message_color']) ? $_SESSION['message_color'] : 'black';
+
+        echo '<p style="color: ' . $message_color . ';">' . $message . '</p>';
+
+        // Clear the session message
+        unset($_SESSION['message']);
+        unset($_SESSION['message_color']);
+    }
+
+    // Loop through the rows in the result set
+    while ($row = $resultFetchAll->fetch_assoc()) {
+        echo '<tr>';
+        echo '<td>' . htmlspecialchars($row['domainName']) . '</td>';
+        echo '<td>' . htmlspecialchars($row['projectName']) . '</td>';
+        echo '<td>' . htmlspecialchars($row['SSLStatus']) . '</td>';
+        echo '<td>' . htmlspecialchars($row['DaysLeftToExpire']) . ' days</td>';
+        echo '<td>' . htmlspecialchars($row['ARecord']) . '</td>';
+        echo '<td>' . htmlspecialchars($row['Provider']) . '</td>';
+        echo '<td>' . htmlspecialchars($row['FreeorPaid']) . '</td>';
+        echo '<td>' . htmlspecialchars($row['DNSManager']) . '</td>';
+        echo '<td>' . htmlspecialchars($row['DomainProvider']) . '</td>';
+        echo '<td>';
+        // Styled delete button
+        echo '<form action="delete.php" method="post" style="display:inline-block; margin-right: 5px;">';
+        echo '<input type="hidden" name="id" value="' . htmlspecialchars($row['id']) . '">';
+        echo '<button type="submit" name="deleteBtn" style="background-color: #f44336; color: white; border: none; padding: 8px 12px; cursor: pointer; border-radius: 4px;">Delete</button>';
+        echo '</form>';
+        // Add more action buttons if needed
+        echo '</td>';
+        echo '</tr>';
+    }
+} else {
+    echo "0 results";
+}
+
+// Close the database connection
+?>
+
             </tbody>
         </table>
             

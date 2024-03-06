@@ -319,9 +319,7 @@ if (isset($_POST['search-bar']) && !empty($_POST['search-bar'])) {
   // Modify the SQL query to include the search term
   $sqlFetchAll = "SELECT * FROM ssl_details WHERE domainName LIKE '%$searchTerm%' OR projectName LIKE '%$searchTerm%'";
 } else {
-  // Default query without filtering
-  $sqlFetchAll = "SELECT * FROM ssl_details";
-}
+  
             // Display success or error message
            if (isset($_SESSION['message'])) {
                $message = $_SESSION['message'];
@@ -358,7 +356,9 @@ if (isset($_POST['search-bar']) && !empty($_POST['search-bar'])) {
                 // Add more action buttons if needed
                 echo '</td>';
                 echo '</tr>';
+
             }
+}    
             ?>
             </tbody>
         </table>

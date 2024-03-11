@@ -231,7 +231,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     </form>
     
 <form action="manualprocess.php" method="post">
-<h1>Monitoring MFn1</h1>
+     <h1>Monitoring MFn1</h1>
     <label for="manual_domainName">Domain Name:</label>
     <input type="text" id="manual_domainName" name="manual_domainName" required>
     <label for="projectName">Project name:</label>

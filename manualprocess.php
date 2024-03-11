@@ -15,7 +15,7 @@ if ($conn->connect_error) {
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $domainName = mysqli_real_escape_string($conn, $_POST["manual_domainName"]);
-    $projectName = mysqli_real_escape_string($conn, $_POST["manual_projectName"]);
+    $projectName = mysqli_real_escape_string($conn, $_POST["projectName"]);
     $SSLStatus = mysqli_real_escape_string($conn, $_POST["manual_SSLStatus"]);
     $DaysLeftToExpire = mysqli_real_escape_string($conn, $_POST["manual_DaysLeftToExpire"]);
 

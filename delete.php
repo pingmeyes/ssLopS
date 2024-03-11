@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["deleteBtn"])) {
         $sqlDelete = "DELETE FROM ssl_details WHERE id = $domainId";
     } elseif (isset($manualDomainId)) {
         // Delete the domain with the given ID from the manual_ssl_details table
-        $sqlDelete = "DELETE FROM manual_ssl_details WHERE domainName = $manualDomainId";
+        $sqlDelete = "DELETE FROM manual_ssl_details WHERE idman = $manualDomainId";
     } else {
         // No ID provided, log and redirect to the dashboard
         error_log("No ID provided for deletion");

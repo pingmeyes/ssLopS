@@ -293,6 +293,25 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
             echo $rowExpiring['domainName'] . ' - Expires in ' . $expiryDays . ' days';
             echo '</div>';
         }
+        // Fetch domains with expiry days less than 30
+        $sqlFetchExpiring = "SELECT * FROM manual_ssl_details WHERE DaysLeftToExpire < 30";
+        $resultFetchExpiring = $conn->query($sqlFetchExpiring);
+
+        while ($rowExpiring = $resultFetchExpiring->fetch_assoc()) {
+            $expiryDays = $rowExpiring['DaysLeftToExpire'];
+            $expiryClass = '';
+            if ($expiryDays < 10) {
+                $expiryClass = 'expiry-box-red';
+            } elseif ($expiryDays < 20) {
+                $expiryClass = 'expiry-box-orange';
+            } elseif ($expiryDays < 30) {
+                $expiryClass = 'expiry-box-dark-yellow';
+            }
+
+            echo '<div class="expiry-box ' . $expiryClass . '">';
+            echo $rowExpiring['domainName'] . ' - Expires in ' . $expiryDays . ' days';
+            echo '</div>';
+        }    
         ?>
     </div>
       </div>

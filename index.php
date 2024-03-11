@@ -401,10 +401,11 @@ if ($resultFetchAll->num_rows > 0) {
         echo '<td>' . htmlspecialchars($row['DaysLeftToExpire']) . ' days</td>';
         echo '<td>';
         // Styled delete button
-        echo '<form action="delete.php" method="post" style="display:inline-block; margin-right: 5px;">';
-        echo '<input type="hidden" name="idman" value="' . htmlspecialchars($row['id']) . '">';
-        echo '<button type="submit" name="deleteBtn" style="background-color: #f44336; color: white; border: none; padding: 8px 12px; cursor: pointer; border-radius: 4px;">Delete</button>';
-        echo '</form>';
+        <form action="delete.php" method="post" style="display:inline-block; margin-right: 5px;">
+         <input type="hidden" name="idman" value="' . htmlspecialchars($row['id']) . '">
+         <input type="hidden" name="table" value="manual_ssl_details">
+         <button type="submit" name="deleteBtn" style="background-color: #f44336; color: white; border: none; padding: 8px 12px; cursor: pointer; border-radius: 4px;">Delete</button>
+        </form>
 
         // Add more action buttons if needed
         echo '</td>';

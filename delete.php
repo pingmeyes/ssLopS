@@ -24,27 +24,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["deleteBtn"])) {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    // Delete the domain with the given ID from the database
-    $sqlDelete = "DELETE FROM ssl_details WHERE id = $domainId";
+    // Prepare the SQL statement for deleting from ssl_details
+    $stmt = $conn->prepare("DELETE FROM ssl_details WHERE id = ?");
+    $stmt->bind_param("i", $domainId);
+    $stmt->execute();
 
-    if ($conn->query($sqlDelete) === TRUE) {
-        $_SESSION['message'] = 'Record deleted successfully';
+    // Check if the deletion was successful
+    if ($stmt->affected_rows > 0) {
+        $_SESSION['message'] = 'Record from ssl_details deleted successfully';
         $_SESSION['message_color'] = 'green';
     } else {
-        $_SESSION['message'] = 'Error deleting record: ' . $conn->error;
+        $_SESSION['message'] = 'Error deleting record from ssl_details: ' . $conn->error;
         $_SESSION['message_color'] = 'red';
     }
 
-    $sqlmanDelete = "DELETE FROM manual_ssl_details WHERE id = $domainId";
+    // Prepare the SQL statement for deleting from manual_ssl_details
+    $stmt = $conn->prepare("DELETE FROM manual_ssl_details WHERE id = ?");
+    $stmt->bind_param("i", $domainId);
+    $stmt->execute();
 
-    if ($conn->query($sqlmanDelete) === TRUE) {
-        $_SESSION['message'] = 'Record deleted successfully';
-        $_SESSION['message_color'] = 'green';
+    // Check if the deletion was successful
+    if ($stmt->affected_rows > 0) {
+        $_SESSION['message'] .= ' Record from manual_ssl_details deleted successfully';
     } else {
-        $_SESSION['message'] = 'Error deleting record: ' . $conn->error;
+        $_SESSION['message'] .= ' Error deleting record from manual_ssl_details: ' . $conn->error;
         $_SESSION['message_color'] = 'red';
     }
-    // Close the database connection
+
+    // Close the statement and the database connection
+    $stmt->close();
     $conn->close();
 } else {
     // Invalid request, log and redirect to the dashboard
@@ -53,11 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["deleteBtn"])) {
     exit();
 }
 
-// Introduce a delay for debugging
-sleep(5);
-
 // Redirect back to the dashboard
 header("Location: index.php");
 exit();
-
 ?>

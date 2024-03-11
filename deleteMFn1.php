@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["deleteBtn"])) {
     // Determine which table to delete from based on the presence of an ID
     if (isset($domainId)) {
         // Delete the domain with the given ID from the ssl_details table
-        $sqlDelete = "DELETE FROM ssl_details WHERE id = $domainId";
+        $sqlDelete = "DELETE FROM manual_ssl_details WHERE id = $domainId";
     } 
     else {
         // No ID provided, log and redirect to the dashboard

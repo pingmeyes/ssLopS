@@ -10,7 +10,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 // Check if the request method is POST and deleteBtn is set
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["deleteBtn"])) {
     $domainId = $_POST["id"];
-    $domainIdman = $_POST["idman"];
+    $manualDomainId = $_POST["idman"];
 
     $servername = "localhost";
     $username = "root";
@@ -25,22 +25,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["deleteBtn"])) {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    // Delete the domain with the given ID from the database
-    $sqlDelete = "DELETE FROM ssl_details WHERE id = $domainId";
-    if ($conn->query($sqlDelete) === TRUE) {
-        $_SESSION['message'] = 'Record from ssl_details deleted successfully';
-        $_SESSION['message_color'] = 'green';
+    // Determine which table to delete from based on the presence of an ID
+    if (isset($domainId)) {
+        // Delete the domain with the given ID from the ssl_details table
+        $sqlDelete = "DELETE FROM ssl_details WHERE id = $domainId";
+    } elseif (isset($manualDomainId)) {
+        // Delete the domain with the given ID from the manual_ssl_details table
+        $sqlDelete = "DELETE FROM manual_ssl_details WHERE idman = $manualDomainId";
     } else {
-        $_SESSION['message'] = 'Error deleting record from ssl_details: ' . $conn->error;
-        $_SESSION['message_color'] = 'red';
+        // No ID provided, log and redirect to the dashboard
+        error_log("No ID provided for deletion");
+        header("Location: index.php");
+        exit();
     }
 
-    // Delete the domain with the given ID from the manual_ssl_details table
-    $sqlmanDelete = "DELETE FROM manual_ssl_details WHERE id = $domainIdman";
-    if ($conn->query($sqlmanDelete) === TRUE) {
-        $_SESSION['message'] .= ' Record from manual_ssl_details deleted successfully';
+    // Execute the delete query
+    if ($conn->query($sqlDelete) === TRUE) {
+        $_SESSION['message'] = 'Record deleted successfully';
+        $_SESSION['message_color'] = 'green';
     } else {
-        $_SESSION['message'] .= ' Error deleting record from manual_ssl_details: ' . $conn->error;
+        $_SESSION['message'] = 'Error deleting record: ' . $conn->error;
         $_SESSION['message_color'] = 'red';
     }
 

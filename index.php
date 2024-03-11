@@ -229,6 +229,18 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
         <button type="submit">Submit</button>
     </form>
+    
+<form action="manualprocess.php" method="post">
+    <label for="manual_domainName">Domain Name:</label>
+    <input type="text" id="manual_domainName" name="manual_domainName" required>
+    <label for="manual_projectName">Project Name:</label>
+    <input type="text" id="manual_projectName" name="manual_projectName" required>
+    <label for="manual_SSLStatus">SSL Status:</label>
+    <input type="text" id="manual_SSLStatus" name="manual_SSLStatus" required>
+    <label for="manual_DaysLeftToExpire">Days Left to Expire:</label>
+    <input type="number" id="manual_DaysLeftToExpire" name="manual_DaysLeftToExpire" required>
+    <input type="submit" value="Add Manual SSL Details">
+</form>
 
       
     <div><a href="empty.php" onclick="return confirm('Are you sure you want to delete all records?');">Delete All Records</a></div>

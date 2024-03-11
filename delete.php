@@ -34,7 +34,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["deleteBtn"])) {
         $_SESSION['message'] = 'Error deleting record: ' . $conn->error;
         $_SESSION['message_color'] = 'red';
     }
+    // Delete the domain with the given ID from the database
+    $sqlDelete = "DELETE FROM manual_ssl_details WHERE id = $domainId";
 
+    if ($conn->query($sqlDelete) === TRUE) {
+        $_SESSION['message'] = 'Record deleted successfully';
+        $_SESSION['message_color'] = 'green';
+    } else {
+        $_SESSION['message'] = 'Error deleting record: ' . $conn->error;
+        $_SESSION['message_color'] = 'red';
+    }
     // Close the database connection
     $conn->close();
 } else {

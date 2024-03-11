@@ -231,6 +231,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     </form>
     
 <form action="manualprocess.php" method="post">
+<h1>Monitoring MFn1</h1>
     <label for="manual_domainName">Domain Name:</label>
     <input type="text" id="manual_domainName" name="manual_domainName" required>
     <label for="manual_projectName">Project Name:</label>
@@ -239,7 +240,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     <input type="text" id="manual_SSLStatus" name="manual_SSLStatus" required>
     <label for="manual_DaysLeftToExpire">Days Left to Expire:</label>
     <input type="number" id="manual_DaysLeftToExpire" name="manual_DaysLeftToExpire" required>
-    <input type="submit" value="Add Manual SSL Details">
+    <input type="submit" value="Add to Dashboard">
 </form>
 
       

@@ -10,7 +10,6 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 // Check if the request method is POST and deleteBtn is set
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["deleteBtn"])) {
     $domainId = $_POST["id"];
-    $manualDomainId = $_POST["idman"];
 
     $servername = "localhost";
     $username = "root";
@@ -29,9 +28,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["deleteBtn"])) {
     if (isset($domainId)) {
         // Delete the domain with the given ID from the ssl_details table
         $sqlDelete = "DELETE FROM ssl_details WHERE id = $domainId";
-    } elseif (isset($manualDomainId)) {
+    } elseif (isset($domainId)) {
         // Delete the domain with the given ID from the manual_ssl_details table
-        $sqlDelete = "DELETE FROM manual_ssl_details WHERE idman = $manualDomainId";
+        $sqlDelete = "DELETE FROM manual_ssl_details WHERE id = $domainId";
     } else {
         // No ID provided, log and redirect to the dashboard
         error_log("No ID provided for deletion");

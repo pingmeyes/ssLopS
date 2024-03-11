@@ -399,6 +399,11 @@ if ($resultFetchAll->num_rows > 0) {
         echo '<td>' . htmlspecialchars($row['projectName']) . '</td>';
         echo '<td>' . htmlspecialchars($row['SSLStatus']) . '</td>';
         echo '<td>' . htmlspecialchars($row['DaysLeftToExpire']) . ' days</td>';
+        echo '<td>' . htmlspecialchars($row['ARecord']) . '</td>';
+        echo '<td>' . htmlspecialchars($row['Provider']) . '</td>';
+        echo '<td>' . htmlspecialchars($row['FreeorPaid']) . '</td>';
+        echo '<td>' . htmlspecialchars($row['DNSManager']) . '</td>';
+        echo '<td>' . htmlspecialchars($row['DomainProvider']) . '</td>';
         echo '<td>';
         // Styled delete button
         echo '<form action="deleteMFn1.php" method="post" style="display:inline-block; margin-right: 5px;">';

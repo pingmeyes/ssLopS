@@ -26,24 +26,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["deleteBtn"])) {
 
     // Delete the domain with the given ID from the database
     $sqlDelete = "DELETE FROM ssl_details WHERE id = $domainId";
-
     if ($conn->query($sqlDelete) === TRUE) {
-        $_SESSION['message'] = 'Record deleted successfully';
+        $_SESSION['message'] = 'Record from ssl_details deleted successfully';
         $_SESSION['message_color'] = 'green';
     } else {
-        $_SESSION['message'] = 'Error deleting record: ' . $conn->error;
+        $_SESSION['message'] = 'Error deleting record from ssl_details: ' . $conn->error;
         $_SESSION['message_color'] = 'red';
     }
 
+    // Delete the domain with the given ID from the manual_ssl_details table
     $sqlmanDelete = "DELETE FROM manual_ssl_details WHERE id = $domainId";
-
     if ($conn->query($sqlmanDelete) === TRUE) {
-        $_SESSION['message'] = 'Record deleted successfully';
-        $_SESSION['message_color'] = 'green';
+        $_SESSION['message'] .= ' Record from manual_ssl_details deleted successfully';
     } else {
-        $_SESSION['message'] = 'Error deleting record: ' . $conn->error;
+        $_SESSION['message'] .= ' Error deleting record from manual_ssl_details: ' . $conn->error;
         $_SESSION['message_color'] = 'red';
     }
+
     // Close the database connection
     $conn->close();
 } else {
@@ -53,11 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["deleteBtn"])) {
     exit();
 }
 
-// Introduce a delay for debugging
-sleep(5);
-
 // Redirect back to the dashboard
 header("Location: index.php");
 exit();
-
 ?>

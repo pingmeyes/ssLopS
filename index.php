@@ -234,8 +234,20 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 <h1>Monitoring MFn1</h1>
     <label for="manual_domainName">Domain Name:</label>
     <input type="text" id="manual_domainName" name="manual_domainName" required>
-    <label for="manual_projectName">Project Name:</label>
-    <input type="text" id="manual_projectName" name="manual_projectName" required>
+    <label for="projectName">Project name:</label>
+        <select id="projectName" name="projectName" required>
+            <option value="E-VS">E-VS</option>
+            <option value="RealtyNinja">Realty Ninja</option>
+            <option value="Courier NetWork">Courier NetWork</option>
+            <option value="Quavered">Quavered</option>
+            <option value="Phobs">Phobs</option>
+            <option value="32auctions">32auctions</option>
+            <option value="Logoup">Logoup</option>
+            <option value="NikeSB">NikeSB</option>
+            <option value="waitrainer">waitrainer</option>
+            <option value="Acumed">Acumed</option>
+            <option value="Next reason">Next reason</option>
+        </select>
     <label for="manual_SSLStatus">SSL Status:</label>
     <input type="text" id="manual_SSLStatus" name="manual_SSLStatus" required>
     <label for="manual_DaysLeftToExpire">Days Left to Expire:</label>

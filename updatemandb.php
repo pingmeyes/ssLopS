@@ -2,7 +2,7 @@
 // Database connection details
 $servername = "localhost";
 $username = "root";
-$password = "pass";
+$password = "root";
 $dbname = "domaindetails";
 
 // Create connection
@@ -14,7 +14,7 @@ if ($conn->connect_error) {
 }
 
 // SQL query to increment daystoexpire for each domain
-$sql = "UPDATE your_table_name SET daystoexpire = daystoexpire + 1";
+$sql = "UPDATE manual_ssl_details SET DaysLeftToExpire = DaysLeftToExpire + 1";
 
 if ($conn->query($sql) === TRUE) {
     echo "Days to expire incremented successfully";

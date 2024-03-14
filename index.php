@@ -363,13 +363,13 @@ if ($conn->connect_error) {
 // Check if the search form is submitted
 if (isset($_POST['search-bar']) && !empty($_POST['search-bar'])) {
     $searchTerm = $_POST['search-bar'];
-    // Modify the SQL query to include the search term and order by DaysLeftToExpire in descending order
-    $sqlFetchAll = "SELECT * FROM ssl_details WHERE domainName LIKE '%$searchTerm%' OR projectName LIKE '%$searchTerm%' ORDER BY DaysLeftToExpire DESC";
-    $sqlFetchManualSslDetails = "SELECT * FROM manual_ssl_details WHERE domainName LIKE '%$searchTerm%' OR projectName LIKE '%$searchTerm%' ORDER BY DaysLeftToExpire DESC";
+    // Modify the SQL query to include the search term and order by DaysLeftToExpire in ascending order
+    $sqlFetchAll = "SELECT * FROM ssl_details WHERE domainName LIKE '%$searchTerm%' OR projectName LIKE '%$searchTerm%' ORDER BY DaysLeftToExpire ASC";
+    $sqlFetchManualSslDetails = "SELECT * FROM manual_ssl_details WHERE domainName LIKE '%$searchTerm%' OR projectName LIKE '%$searchTerm%' ORDER BY DaysLeftToExpire ASC";
 } else {
-    // Default query without filtering, but with ordering by DaysLeftToExpire in descending order
-    $sqlFetchAll = "SELECT * FROM ssl_details ORDER BY DaysLeftToExpire DESC";
-    $sqlFetchManualSslDetails = "SELECT * FROM manual_ssl_details ORDER BY DaysLeftToExpire DESC";
+    // Default query without filtering, but with ordering by DaysLeftToExpire in ascending order
+    $sqlFetchAll = "SELECT * FROM ssl_details ORDER BY DaysLeftToExpire ASC";
+    $sqlFetchManualSslDetails = "SELECT * FROM manual_ssl_details ORDER BY DaysLeftToExpire ASC";
 }
 
 // Execute the query

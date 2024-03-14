@@ -15,7 +15,7 @@ if ($conn->connect_error) {
 
 // Delete all records from ssl_details
 $sqlDeleteAll = "DELETE FROM ssl_details;";
-$sqlDeleteAll = "DELETE FROM manual_ssl_details;";
+$sqlDeleteAllman = "DELETE FROM manual_ssl_details;";
 
 
 if ($conn->query($sqlDeleteAll) === TRUE) {

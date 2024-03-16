@@ -226,6 +226,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
             <option value="Acumed">Acumed</option>
             <option value="Next reason">Next reason</option>
             <option value="Owen Jones">Owen Jones</option>
+            <option value="dakotafunds">dakotafunds</option>
         </select>
 
         <button type="submit">Submit</button>
@@ -249,6 +250,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
             <option value="Acumed">Acumed</option>
             <option value="Next reason">Next reason</option>
             <option value="Owen Jones">Owen Jones</option>
+            <option value="dakotafunds">dakotafunds</option>
         </select>
     <label for="manual_SSLStatus">SSL Status:</label>
     <input type="text" id="manual_SSLStatus" name="manual_SSLStatus" required>

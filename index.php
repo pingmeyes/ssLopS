@@ -214,12 +214,12 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
         <label for="projectName">Project name:</label>
         <select id="projectName" name="projectName" required>
-            <option value="E-VS">E-VS</option>
+            <option value="EVS">EVS</option>
             <option value="RealtyNinja">Realty Ninja</option>
             <option value="Courier NetWork">Courier NetWork</option>
             <option value="Quavered">Quavered</option>
             <option value="Phobs">Phobs</option>
-            <option value="32auctions">32auctions</option>
+            <option value="cyberauctions">32auctions</option>
             <option value="Logoup">Logoup</option>
             <option value="NikeSB">NikeSB</option>
             <option value="waitrainer">waitrainer</option>
@@ -238,12 +238,12 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     <input type="text" id="manual_domainName" name="manual_domainName" required>
     <label for="projectName">Project name:</label>
         <select id="projectName" name="projectName" required>
-            <option value="E-VS">E-VS</option>
+            <option value="EVS">EVS</option>
             <option value="RealtyNinja">Realty Ninja</option>
             <option value="Courier NetWork">Courier NetWork</option>
             <option value="Quavered">Quavered</option>
             <option value="Phobs">Phobs</option>
-            <option value="32auctions">32auctions</option>
+            <option value="cyberauctions">32auctions</option>
             <option value="Logoup">Logoup</option>
             <option value="NikeSB">NikeSB</option>
             <option value="waitrainer">waitrainer</option>

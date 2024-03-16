@@ -219,7 +219,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
             <option value="Courier NetWork">Courier NetWork</option>
             <option value="Quavered">Quavered</option>
             <option value="Phobs">Phobs</option>
-            <option value="cyberauctions">32auctions</option>
+            <option value="cyberauctions">cyberauctions</option>
             <option value="Logoup">Logoup</option>
             <option value="NikeSB">NikeSB</option>
             <option value="waitrainer">waitrainer</option>
@@ -243,7 +243,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
             <option value="Courier NetWork">Courier NetWork</option>
             <option value="Quavered">Quavered</option>
             <option value="Phobs">Phobs</option>
-            <option value="cyberauctions">32auctions</option>
+            <option value="cyberauctions">cyberauctions</option>
             <option value="Logoup">Logoup</option>
             <option value="NikeSB">NikeSB</option>
             <option value="waitrainer">waitrainer</option>

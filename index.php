@@ -232,7 +232,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
         <button type="submit">Submit</button>
     </form>
     
-<form action="manualprocess.php" method="post">
+<form action="customprocess.php" method="post">
      <h1>Monitoring MFn1</h1>
     <label for="manual_domainName">Domain Name:</label>
     <input type="text" id="manual_domainName" name="manual_domainName" required>

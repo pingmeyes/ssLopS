@@ -94,3 +94,7 @@ nginx
 
  Perform actions such as deleting individual domains or clearing all records as needed. Be cautious when using the "Delete All Records" feature, as it will remove all domains from the database.
 
+## Contributing
+
+Contributions are welcome! If you'd like to contribute to this project, Contact: sanjai.s.error@gmail.com
+

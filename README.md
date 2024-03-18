@@ -1,6 +1,6 @@
 # SSL Manager
 
-SSL Manager is a web application designed to simplify SSL certificate management for domains. It provides an intuitive interface for adding domains, tracking SSL status, and monitoring expiration dates. With SSL Manager, users can efficiently manage their SSL certificates and ensure the security of their websites.
+SSL Manager is a web application designed to simplify SSL monitoring for domains. It provides an intuitive interface for adding domains, tracking SSL status, and monitoring expiration dates. With SSL Manager, users can efficiently track their SSL and ensure the security of their websites.
 
 ## Table of Contents
 

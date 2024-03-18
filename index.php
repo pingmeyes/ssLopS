@@ -381,7 +381,7 @@ $resultFetchAll = $conn->query($sqlFetchAll);
 $resultManualSslDetails = $conn->query($sqlFetchManualSslDetails);
 
 // Check if any results were found
-if ($resultFetchAll->num_rows > 0) {
+if ($resultFetchAll && $resultFetchAll->num_rows > 0) {
     // Display success or error message
     if (isset($_SESSION['message'])) {
         $message = $_SESSION['message'];

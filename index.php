@@ -350,11 +350,11 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
             </thead>
             <tbody>
 <?php
-
+$config = include('/home/deploy/secrets.php');
 // Database connection details
 $servername = "localhost";
 $username = "root";
-$password = "root";
+$password = $config['db_password'];
 $dbname = "domaindetails";
 
 // Create connection

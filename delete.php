@@ -1,4 +1,5 @@
 <?php
+$config = include('/home/deploy/secrets.php');
 session_start();
 
 // Check if the user is not logged in, redirect to the login page
@@ -10,10 +11,10 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 // Check if the request method is POST and deleteBtn is set
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["deleteBtn"])) {
     $domainId = $_POST["id"];
-
+     
     $servername = "localhost";
     $username = "root";
-    $password = "root";
+    $password = $config['db_password'];
     $dbname = "domaindetails";
 
     // Create connection

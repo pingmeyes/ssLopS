@@ -1,8 +1,9 @@
 <?php
+$config = include('/home/deploy/secrets.php');
 // Database connection
 $servername = "localhost";
 $username = "root";
-$password = "root";
+$password = $config['db_password'];
 $dbname = "domaindetails";
 
 // Create connection

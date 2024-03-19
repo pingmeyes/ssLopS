@@ -13,6 +13,14 @@
     </form>
 
     <?php
+    function getSQLError($conn) {
+        if ($conn->connect_error) {
+            return $conn->connect_error;
+        } else {
+            return $conn->error;
+        }
+    }
+
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $config = include('/home/deploy/secrets.php');
         // Database connection details
@@ -29,7 +37,7 @@
 
             // Check connection
             if ($conn->connect_error) {
-                die("Connection failed: " . $conn->connect_error);
+                die("Connection failed: " . getSQLError($conn));
             }
 
             // Modify the SQL query to include the search term and order by DaysLeftToExpire in ascending order

@@ -382,7 +382,8 @@ $resultFetchAll = $conn->query($sqlFetchAll);
 $resultManualSslDetails = $conn->query($sqlFetchManualSslDetails);
 
 // Check if any results were found
-if ($resultFetchAll->num_rows > 0) {
+// Check if any results were found in either table
+if ($resultFetchAll->num_rows > 0 || $resultManualSslDetails->num_rows > 0) {
     // Display success or error message
     if (isset($_SESSION['message'])) {
         $message = $_SESSION['message'];
@@ -395,8 +396,9 @@ if ($resultFetchAll->num_rows > 0) {
         unset($_SESSION['message_color']);
     }
 
-    // Loop through the rows in the result set
+    // Loop through the rows in the result set for ssl_details
     while ($row = $resultFetchAll->fetch_assoc()) {
+        // Display the result row for ssl_details
         echo '<tr>';
         echo '<td>' . htmlspecialchars($row['domainName']) . '</td>';
         echo '<td>' . htmlspecialchars($row['projectName']) . '</td>';
@@ -413,11 +415,15 @@ if ($resultFetchAll->num_rows > 0) {
         echo '<input type="hidden" name="id" value="' . htmlspecialchars($row['id']) . '">';
         echo '<button type="submit" name="deleteBtn" style="background-color: #f44336; color: white; border: none; padding: 8px 12px; cursor: pointer; border-radius: 4px;">Delete</button>';
         echo '</form>';
+
         // Add more action buttons if needed
         echo '</td>';
         echo '</tr>';
     }
+
+    // Loop through the rows in the result set for manual_ssl_details
     while ($row = $resultManualSslDetails->fetch_assoc()) {
+        // Display the result row for manual_ssl_details
         echo '<tr>';
         echo '<td>' . htmlspecialchars($row['domainName']) . '</td>';
         echo '<td>' . htmlspecialchars($row['projectName']) . '</td>';
@@ -440,8 +446,10 @@ if ($resultFetchAll->num_rows > 0) {
         echo '</tr>';
     }
 } else {
-    echo "0 results";
+    // No results found in either table, display a message
+    echo "No results found in either table.";
 }
+
 
 // Close the database connection
 ?>

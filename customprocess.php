@@ -1,6 +1,8 @@
 <?php
+session_start(); // Start the session
+
 // Include configuration (assuming secrets.php is outside the document root for security)
-$config = $config = include('/home/deploy/secrets.php');  // Adjust path if necessary
+$config = include('/home/deploy/secrets.php'); // Adjust path if necessary
 
 // Database connection
 $servername = "localhost";
@@ -27,31 +29,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $resultCheckExistence = $conn->query($sqlCheckExistence);
 
     if ($resultCheckExistence->num_rows > 0) {
-        // Domain already exists, set appropriate message (assuming you have a way to display messages to the user)
-        echo 'Domain already exists in the database';
+        // Domain already exists, set appropriate message
+        $_SESSION['message'] = 'Domain already exists in the database';
     } else {
         // Domain doesn't exist, proceed with insertion
-        // Prepare and bind
         $stmt = $conn->prepare("INSERT INTO manual_ssl_details (domainName, projectName, SSLStatus, DaysLeftToExpire) VALUES (?, ?, ?, ?)");
         $stmt->bind_param("sssi", $domainName, $projectName, $SSLStatus, $DaysLeftToExpire);
 
         // Set parameters and execute
         if ($stmt->execute()) {
-            echo "Manual SSL details added successfully";
-
-            // Redirect to index.php after successful insertion
-            header("Location: index.php");  // Replace with your actual index.php path if necessary
-            exit;  // Stop further script execution after redirecting
+            $_SESSION['message'] = "Manual SSL details added successfully";
         } else {
-            echo "Error: " . $stmt->error;
+            $_SESSION['message'] = "Error: " . $stmt->error;
         }
 
         // Close statement (within successful execution block)
         $stmt->close();
     }
+
+    // Redirect to index.php after successful insertion or if domain already exists
+    header("Location: index.php");
+    exit;
 }
 
 // Close connection (outside of if block to ensure it happens even if no POST)
 $conn->close();
-
 ?>

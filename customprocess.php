@@ -1,5 +1,7 @@
 <?php
-$config = include('/home/deploy/secrets.php');
+// Include configuration (assuming secrets.php is outside the document root for security)
+$config = $config = include('/home/deploy/secrets.php');  // Adjust path if necessary
+
 // Database connection
 $servername = "localhost";
 $username = "root";
@@ -20,28 +22,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $SSLStatus = mysqli_real_escape_string($conn, $_POST["manual_SSLStatus"]);
     $DaysLeftToExpire = mysqli_real_escape_string($conn, $_POST["manual_DaysLeftToExpire"]);
 
-    // Prepare and bind
-    $stmt = $conn->prepare("INSERT INTO manual_ssl_details (domainName, projectName, SSLStatus, DaysLeftToExpire) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("sssi", $domainName, $projectName, $SSLStatus, $DaysLeftToExpire);
+    // Check if domain already exists in either table
+    $sqlCheckExistence = "SELECT * FROM ssl_details INNER JOIN manual_ssl_details ON ssl_details.domainName = manual_ssl_details.domainName WHERE ssl_details.domainName = '$domainName' OR manual_ssl_details.domainName = '$domainName'";
+    $resultCheckExistence = $conn->query($sqlCheckExistence);
 
-    // Set parameters and execute
-    if ($stmt->execute()) {
-        echo "Manual SSL details added successfully";
-
-        // Redirect to index.php after successful insertion
-        header("Location: index.php");  // Replace with your actual index.php path if necessary
-        exit;  // Stop further script execution after redirecting
+    if ($resultCheckExistence->num_rows > 0) {
+        // Domain already exists, set appropriate message (assuming you have a way to display messages to the user)
+        echo 'Domain already exists in the database';
     } else {
-        echo "Error: " . $stmt->error;
+        // Domain doesn't exist, proceed with insertion
+        // Prepare and bind
+        $stmt = $conn->prepare("INSERT INTO manual_ssl_details (domainName, projectName, SSLStatus, DaysLeftToExpire) VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("sssi", $domainName, $projectName, $SSLStatus, $DaysLeftToExpire);
+
+        // Set parameters and execute
+        if ($stmt->execute()) {
+            echo "Manual SSL details added successfully";
+
+            // Redirect to index.php after successful insertion
+            header("Location: index.php");  // Replace with your actual index.php path if necessary
+            exit;  // Stop further script execution after redirecting
+        } else {
+            echo "Error: " . $stmt->error;
+        }
+
+        // Close statement (within successful execution block)
+        $stmt->close();
     }
-
-
-
-    // Close statement and connection (within successful execution block)
-    $stmt->close();
-
 }
 
+// Close connection (outside of if block to ensure it happens even if no POST)
 $conn->close();
 
 ?>

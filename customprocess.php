@@ -25,12 +25,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("sssi", $domainName, $projectName, $SSLStatus, $DaysLeftToExpire);
 
     // Set parameters and execute
-    $stmt->execute();
+    if ($stmt->execute()) {
+        echo "Manual SSL details added successfully";
 
-    echo "Manual SSL details added successfully";
+        // Redirect to index.php after successful insertion
+        header("Location: index.php");  // Replace with your actual index.php path if necessary
+        exit;  // Stop further script execution after redirecting
+    } else {
+        echo "Error: " . $stmt->error;
+    }
 
-    // Close statement and connection
+
+
+    // Close statement and connection (within successful execution block)
     $stmt->close();
-    $conn->close();
+
 }
+
+$conn->close();
+
 ?>

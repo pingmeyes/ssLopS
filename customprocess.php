@@ -19,37 +19,47 @@ if ($conn->connect_error) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $domainName = mysqli_real_escape_string($conn, $_POST["manual_domainName"]);
+    $domainName = $_POST["manual_domainName"];
     $projectName = mysqli_real_escape_string($conn, $_POST["projectName"]);
     $SSLStatus = mysqli_real_escape_string($conn, $_POST["manual_SSLStatus"]);
     $DaysLeftToExpire = mysqli_real_escape_string($conn, $_POST["manual_DaysLeftToExpire"]);
 
-    // Check if domain already exists in either table
+    // Check if the domain already exists in either table
     $sqlCheckExistence = "SELECT * FROM ssl_details INNER JOIN manual_ssl_details ON ssl_details.domainName = manual_ssl_details.domainName WHERE ssl_details.domainName = '$domainName' OR manual_ssl_details.domainName = '$domainName'";
     $resultCheckExistence = $conn->query($sqlCheckExistence);
-
+    
     if ($resultCheckExistence->num_rows > 0) {
         // Domain already exists, set appropriate message
         $_SESSION['message'] = 'Domain already exists in the database';
+        $_SESSION['message_color'] = 'red';
     } else {
         // Domain doesn't exist, proceed with insertion
-        $stmt = $conn->prepare("INSERT INTO manual_ssl_details (domainName, projectName, SSLStatus, DaysLeftToExpire) VALUES (?, ?, ?, ?)");
-        $stmt->bind_param("sssi", $domainName, $projectName, $SSLStatus, $DaysLeftToExpire);
+        // Assuming you have functions to simulate the necessary data
+        $ARecord = simulateARecord($domainName);
+        $provider = simulateProvider($domainName);
+        $domainProvider = simulateDomainProvider($domainName);
+        $freePaidStatus = simulateFreePaidStatus($domainName);
+        $dnsManager = simulateDNSManager($domainName);
 
-        // Set parameters and execute
-        if ($stmt->execute()) {
-            $_SESSION['message'] = "Manual SSL details added successfully";
+        // Handle the case when DaysLeftToExpire is not available
+        $daysLeftToExpireValue = empty($DaysLeftToExpire) ? 'NULL' : $DaysLeftToExpire;
+
+        // Insert data into the database
+        $sql = "INSERT INTO ssl_details (domainName, projectName, ARecord, DaysLeftToExpire, SSLStatus, Provider, DomainProvider, FreeorPaid, DNSManager)
+            VALUES ('$domainName', '$projectName', '$ARecord', $daysLeftToExpireValue, '$SSLStatus', '$provider', '$domainProvider', '$freePaidStatus', '$dnsManager')";
+
+        if ($conn->query($sql) === TRUE) {
+            $_SESSION['message'] = 'Record added successfully';
+            $_SESSION['message_color'] = 'green';
         } else {
-            $_SESSION['message'] = "Error: " . $stmt->error;
+            $_SESSION['message'] = 'Error: ' . $sql . '<br>' . $conn->error;
+            $_SESSION['message_color'] = 'red';
         }
-
-        // Close statement (within successful execution block)
-        $stmt->close();
     }
 
-    // Redirect to index.php after successful insertion or if domain already exists
-    header("Location: index.php");
-    exit;
+    // Redirect back to the referring page
+    header('Location: ' . $_SERVER['HTTP_REFERER']);
+    exit();
 }
 
 // Close connection (outside of if block to ensure it happens even if no POST)

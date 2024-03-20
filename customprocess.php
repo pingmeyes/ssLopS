@@ -1,6 +1,6 @@
 <?php
 // Include configuration (assuming secrets.php is outside the document root for security)
-$config = include realpath(__DIR__ . '/../secrets.php');  // Adjust path if necessary
+$config = $config = include('/home/deploy/secrets.php');  // Adjust path if necessary
 
 // Database connection
 $servername = "localhost";

@@ -25,7 +25,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $DaysLeftToExpire = mysqli_real_escape_string($conn, $_POST["manual_DaysLeftToExpire"]);
 
     // Check if domain already exists in either table
-    $sqlCheckExistence = "SELECT * FROM ssl_details INNER JOIN manual_ssl_details ON ssl_details.domainName = manual_ssl_details.domainName WHERE ssl_details.domainName = '$domainName' OR manual_ssl_details.domainName = '$domainName'";
+    $sqlCheckExistence = "SELECT * FROM ssl_details WHERE domainName = '$domainName'
+    UNION ALL
+    SELECT * FROM manual_ssl_details WHERE domainName = '$domainName'";
     $resultCheckExistence = $conn->query($sqlCheckExistence);
 
     if ($resultCheckExistence->num_rows > 0) {

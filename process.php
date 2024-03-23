@@ -163,7 +163,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $projectName = mysqli_real_escape_string($conn, $_POST["projectName"]);
 
     // Check if the domain already exists
-    $sqlCheckExistence = "SELECT * FROM ssl_details WHERE domainName = '$domainName'";
+    $sqlCheckExistence = "SELECT * FROM ssl_details WHERE domainName = '$domainName'
+    UNION ALL
+    SELECT * FROM manual_ssl_details WHERE domainName = '$domainName'";
     $resultCheckExistence = $conn->query($sqlCheckExistence);
     
     if ($resultCheckExistence->num_rows > 0) {

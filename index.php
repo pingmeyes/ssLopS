@@ -197,7 +197,6 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
 <div class="sidenav">
     <a href="#sslmanager">SSL Manager</a>
-    <a href="docs.html">Documents</a>
 </div>
 
 <div class="main">

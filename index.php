@@ -111,7 +111,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
         }
 
         .search-bar {
-            width: 300%;
+            width: 200%;
             padding: 8px;
             box-sizing: border-box;
             font-size: 16px;

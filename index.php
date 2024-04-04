@@ -21,7 +21,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
         .sidenav {
             height: 100%;
-            width: 160px;
+            width: 20%; /* Adjusted to be more flexible */
             position: fixed;
             z-index: 1;
             top: 0;
@@ -44,18 +44,19 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
         }
 
         .main {
-            margin-left: 160px; /* Same as the width of the sidenav */
-            font-size: 24px; /* Increased text to enable scrolling */
+            margin-left: 20%; /* Adjusted to match the sidenav width */
+            font-size: 24px;
             padding: 0 0 20px 10px;
         }
 
-        @media screen and (max-height: 450px) {
+        @media screen and (max-width: 768px) {
             .sidenav {
-                padding-top: 15px;
+                width: 100%;
+                position: static;
             }
 
-            .sidenav a {
-                font-size: 18px;
+            .main {
+                margin-left: 0;
             }
         }
 
@@ -85,22 +86,20 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
             border-radius: 5px;
             cursor: pointer;
         }
-        
 
-         /* To make the list vertical */
         .expiry-box-list {
-           display: block;
-           margin-top: 10px; /* Adjust margin as needed */
+            display: block;
+            margin-top: 10px;
         }
-        .dashboard-section {
-    padding: 20px;
-    margin-top: 50px; /* Adjusted margin-top to avoid overlap with fixed top-right section */
-    margin-right: 220px; /* Added margin to the right to create space for fixed top-right section */
-    background-color: #fff; /* Added a background color to hide content behind the fixed section */
-    position: relative; /* Ensure relative positioning for absolute child elements */
-    z-index: 0; /* Lower z-index to keep the content behind the fixed section */
-}
 
+        .dashboard-section {
+            padding: 20px;
+            margin-top: 50px;
+            margin-right: 220px;
+            background-color: #fff;
+            position: relative;
+            z-index: 0;
+        }
 
         .dashboard-section h2 {
             margin-bottom: 20px;
@@ -111,7 +110,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
         }
 
         .search-bar {
-            width: 150%;
+            width: 100%; /* Adjusted for responsiveness */
             padding: 8px;
             box-sizing: border-box;
             font-size: 16px;
@@ -147,50 +146,57 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
             background-color: #45a049;
         }
 
-        /* New styles for highlighting expiration days */
         .expiry-box {
             
         }
 
         .expiry-box-red {
-             /* Red for below 10 days */
             color: #ff3737;
             padding:10px 0 10px 0;
-            
-            
         }
 
         .expiry-box-orange {
-             /* Orange for below 20 days */
             color: #ff8306;
             padding:10px 0 10px 0;
-            
-            
         }
 
         .expiry-box-dark-yellow {
-             /* Dark Yellow for below 30 days */
             color: #2ac8e4;
             padding:10px 0 10px 0;
-            
-            
         }
+
         .top-right-sec h4{
-          color: #000;
-          text-align:center;
-          
+            color: #000;
+            text-align:center;
         }
+
         .top-right-sec {
-          padding: 15px 20px 15px 20px;
-          background:#4caf5033;
-          border-radius:30px 0 30px 30px; 
+            padding: 15px 20px 15px 20px;
+            background:#4caf5033;
+            border-radius:30px 0 30px 30px; 
         }
+
         .ssl-exp{
-          display:flex;
-          justify-content:space-between;
-          padding: 0 0 0 20px;
+            display:flex;
+            justify-content:space-between;
+            padding: 0 0 0 20px;
         }
-        
+
+        /* Additional responsive styles */
+        @media screen and (max-width: 768px) {
+            .sidenav {
+                width: 100%;
+                position: static;
+            }
+
+            .main {
+                margin-left: 0;
+            }
+
+            .search-bar {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body>

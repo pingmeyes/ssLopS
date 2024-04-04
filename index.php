@@ -15,21 +15,23 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     <title>SSL Manager</title>
     <style>
         body {
-            font-family: "Lato", sans-serif;
-            margin: 0;
-        }
+    font-family: "Lato", sans-serif;
+    margin: 0;
+    height: 100vh; /* Ensure the body takes up the full viewport height */
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+}
 
         .sidenav {
-            height: 100%;
-            width: 20%; /* Adjusted to be more flexible */
-            position: fixed;
-            z-index: 1;
-            top: 0;
-            left: 0;
-            background-color: #111;
-            overflow-x: hidden;
-            padding-top: 20px;
-        }
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20%; /* Adjust as needed */
+    height: 100%; /* Take up the full height of the viewport */
+    background-color: #111;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
 
         .sidenav a {
             padding: 6px 8px 6px 16px;
@@ -44,21 +46,24 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
         }
 
         .main {
-            margin-left: 20%; /* Adjusted to match the sidenav width */
-            font-size: 24px;
-            padding: 0 0 20px 10px;
-        }
+    margin-top: 100%; /* Adjust to match the height of the sidenav */
+    width: 80%; /* Adjust as needed */
+    padding: 20px;
+}
 
-        @media screen and (max-width: 768px) {
-            .sidenav {
-                width: 100%;
-                position: static;
-            }
+        /* Responsive adjustments */
+@media screen and (max-width: 768px) {
+    .sidenav {
+        width: 100%;
+        position: static;
+    }
 
-            .main {
-                margin-left: 0;
-            }
-        }
+    .main {
+        margin-top: 0;
+        width: 100%;
+    }
+}
+
 
         form.left-form {
             width: 100%;

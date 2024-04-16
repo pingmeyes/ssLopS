@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $sqlInsert = "INSERT INTO manual_ssl_details (domainName, projectName, SSLStatus, DaysLeftToExpire) VALUES ('$domainName', '$projectName', '$SSLStatus', $DaysLeftToExpire)";
         
         if ($conn->query($sqlInsert) === TRUE) {
-            $_SESSION['message'] = "Manual SSL details added successfully";
+            $_SESSION['message'] = "Domian added successfully";
         } else {
             $_SESSION['message'] = "Error: " . $conn->error;
         }

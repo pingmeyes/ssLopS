@@ -272,10 +272,9 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
         <h4>Expiring Domains</h4>
         <!-- Display expiring domains within the main content -->
         <?php
-        $config = include('/home/deploy/secrets.php');
         $servername = "localhost";
         $username = "root";
-        $password = $config['db_password'];
+        $password = 'root';
         $dbname = "domaindetails";
 
         // Create connection
@@ -356,11 +355,10 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
             </thead>
             <tbody>
 <?php
-$config = include('/home/deploy/secrets.php');
 // Database connection details
 $servername = "localhost";
 $username = "root";
-$password = $config['db_password'];
+$password = 'root';
 $dbname = "domaindetails";
 
 // Create connection

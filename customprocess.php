@@ -2,12 +2,11 @@
 session_start(); // Start the session
 
 // Include configuration (assuming secrets.php is outside the document root for security)
-$config = include('/home/deploy/secrets.php'); // Adjust path if necessary
 
 // Database connection
 $servername = "localhost";
 $username = "root";
-$password = $config['db_password'];
+$password = 'root';
 $dbname = "domaindetails";
 
 // Create connection

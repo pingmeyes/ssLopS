@@ -1,11 +1,10 @@
 <?php
 session_start();
-$config = include('/home/deploy/secrets.php');
 
 // Database connection parameters
 $DATABASE_HOST = 'localhost';
 $DATABASE_USER = 'root';
-$DATABASE_PASS = $config['db_password'];
+$DATABASE_PASS = 'root';
 $DATABASE_NAME = 'domaindetails';
 
 // Create connection

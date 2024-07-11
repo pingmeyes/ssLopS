@@ -10,7 +10,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 // Check if the request method is POST and deleteBtn is set
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["deleteBtn"])) {
     $domainId = $_POST["id"];
-     
+
     $servername = "localhost";
     $username = "root";
     $password = "root";
@@ -27,25 +27,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["deleteBtn"])) {
     // Determine which table to delete from based on the presence of an ID
     if (isset($domainId)) {
         // Delete the domain with the given ID from the ssl_details table
-        $sqlDelete = "DELETE FROM ssl_details WHERE id = ?";
-        $stmt = $conn->prepare($sqlDelete);
-        $stmt->bind_param("i", $domainId);
-        $stmt->execute();
-    
-        if ($stmt->affected_rows > 0) {
-            $_SESSION['message'] = 'Record deleted successfully';
-            $_SESSION['message_color'] = 'green';
-        } else {
-            $_SESSION['message'] = 'Error deleting record: ' . $stmt->error;
-            $_SESSION['message_color'] = 'red';
-        }
-        $stmt->close();
-    } else {
+        $sqlDelete = "DELETE FROM ssl_details WHERE id = $domainId";
+    }
+    else {
         // No ID provided, log and redirect to the dashboard
         error_log("No ID provided for deletion");
         header("Location: index.php");
         exit();
     }
+
+    // Execute the delete query
+    if ($conn->query($sqlDelete) === TRUE) {
+        $_SESSION['message'] = 'Record deleted successfully';
+        $_SESSION['message_color'] = 'green';
+    } else {
+        $_SESSION['message'] = 'Error deleting record: ' . $conn->error;
+        $_SESSION['message_color'] = 'red';
+    }
+
+    // Close the database connection
+    $conn->close();
 } else {
     // Invalid request, log and redirect to the dashboard
     error_log("Invalid request to delete.php");

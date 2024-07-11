@@ -27,17 +27,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["deleteBtn"])) {
     // Determine which table to delete from based on the presence of an ID
     if (isset($domainId)) {
         // Delete the domain with the given ID from the ssl_details table
-        $sqlDelete = "DELETE FROM ssl_details WHERE id = $domainId";
-    } 
-    else {
-        // No ID provided, log and redirect to the dashboard
-        error_log("No ID provided for deletion");
-        header("Location: index.php");
-        exit();
-    }
-
-    // Execute the delete query
-    if (isset($domainId)) {
         $sqlDelete = "DELETE FROM ssl_details WHERE id = ?";
         $stmt = $conn->prepare($sqlDelete);
         $stmt->bind_param("i", $domainId);
@@ -52,6 +41,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["deleteBtn"])) {
         }
         $stmt->close();
     } else {
+        // No ID provided, log and redirect to the dashboard
+        error_log("No ID provided for deletion");
+        header("Location: index.php");
+        exit();
+    }
+} else {
     // Invalid request, log and redirect to the dashboard
     error_log("Invalid request to delete.php");
     header("Location: index.php");

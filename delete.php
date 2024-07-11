@@ -1,5 +1,4 @@
 <?php
-$config = include('/home/deploy/secrets.php');
 session_start();
 
 // Check if the user is not logged in, redirect to the login page
@@ -14,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["deleteBtn"])) {
      
     $servername = "localhost";
     $username = "root";
-    $password = $config['db_password'];
+    $password = "root";
     $dbname = "domaindetails";
 
     // Create connection
